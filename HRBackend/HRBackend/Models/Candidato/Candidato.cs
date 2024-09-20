@@ -1,6 +1,6 @@
 ﻿namespace HRBackend.Models.Candidatos
 {
-    public class Candidato
+    public class Candidato : Usuario
     {
         public int Id { get; set; }
         public string Cedula { get; set; }

@@ -1,0 +1,74 @@
+# Archivos de compilacion y configuracion de ASP.NET Core
+bin/
+obj/
+*.log
+*.cache
+*.config
+*.bak
+*.pdb
+
+# Archivos de migraciones de Entity Framework Core (opcional, si deseas excluirlos)
+
+
+# Configuracion de usuario local de Visual Studio/JetBrains/VSCode
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archivos de paquetes NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Archivos generados por el Sistema Operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de entornos virtuales
+.env
+.env.*
+
+# Node.js (para la parte de Angular)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache y archivos temporales de Angular
+dist/
+out-tsc/
+
+# Configuracion de Angular
+.angular/
+
+# Archivos de bases de datos locales
+*.sqlite
+*.sqlite3
+*.sql
+.vs/
+*.vsidx
+# Ignorar la carpeta obj/
+obj/
+
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+
+# Archivos de configuracion o claves locales (seguridad)
+secrets.json
+appsettings.Development.json
+appsettings.json
+
+
+# Archivos de dependencia y compilacion de TypeScript
+*.tsbuildinfo
+
+# Archivos de publicacion y despliegue
+publish/
