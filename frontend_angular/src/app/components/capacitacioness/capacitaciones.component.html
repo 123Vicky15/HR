@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Capacitaciones</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Listado de Capacitaciones</h2>
+        <button class="btn btn-primary">Crear Capacitacion</button>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+                <tr>
+                    <th>Descripción</th>
+                    <th>Nivel</th>
+                    <th>Fecha Desde</th>
+                    <th>Fecha Hasta</th>
+                    <th>Institución</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let capacitacion of capacitacionesList">
+                    <td>{{ capacitacion.descripcion }}</td>
+                    <td>{{ capacitacion.nivel }}</td>
+                    <td>{{ capacitacion.fechaDesde | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ capacitacion.fechaHasta | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ capacitacion.institucion }}</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Editar" data-bs-toggle="modal" data-bs-target="#editCapacitacionModal">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para Editar Capacitación -->
+    <div class="modal fade" id="editCapacitacionModal" tabindex="-1" aria-labelledby="editCapacitacionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCapacitacionModalLabel">Editar Capacitación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="editCapacitacionDescripcion" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="editCapacitacionDescripcion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCapacitacionNivel" class="form-label">Nivel</label>
+                            <select class="form-select" id="editCapacitacionNivel" required>
+                                <option value="">Seleccione</option>
+                                <option value="Grado">Grado</option>
+                                <option value="Post-grado">Post-grado</option>
+                                <option value="Maestría">Maestría</option>
+                                <option value="Doctorado">Doctorado</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Gestión">Gestión</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editFechaDesde" class="form-label">Fecha Desde</label>
+                            <input type="date" class="form-control" id="editFechaDesde" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editFechaHasta" class="form-label">Fecha Hasta</label>
+                            <input type="date" class="form-control" id="editFechaHasta" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editInstitucion" class="form-label">Institución</label>
+                            <input type="text" class="form-control" id="editInstitucion" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

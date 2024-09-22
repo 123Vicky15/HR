@@ -1,11 +1,14 @@
 ﻿using HRBackend.Dtos;
 using HRBackend.Repository.Interface;
 using HRBackend.Services.Interface;
+using HRBackend.Services.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 
 namespace HRBackend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CandidatosController : Controller
     {
         private readonly ICandidatoService _candidatoService;
@@ -15,6 +18,14 @@ namespace HRBackend.Controllers
             _candidatoService = candidatoService;
             _authService = authService;
         }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CandidatoDto>>> GetAllCandidatos()
+        {
+            var candidatos = await _candidatoService.GetAllCandidatosAsync();
+            return Ok(candidatos);
+
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCandidatoById(int id)
         {
@@ -22,19 +33,6 @@ namespace HRBackend.Controllers
             {
                 var candidato = await _candidatoService.GetCandidatoByIdAsync(id);
                 return Ok(candidato);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable>> GetAllCandidatos()
-        {
-            try
-            {
-                var candidatos = await _candidatoService.GetAllCandidatosAsync();
-                return Ok(candidatos);
             }
             catch (Exception ex)
             {

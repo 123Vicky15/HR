@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados Nuevos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .table {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-primary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-primary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-muted mb-4">Empleados Nuevos</h2>
+
+        <div class="mb-4 d-flex justify-content-between align-items-center">
+            <div>
+                <label for="fechaDesde" class="form-label">Desde:</label>
+                <input type="date" id="fechaDesde" class="form-control d-inline" style="width: auto; display: inline-block;">
+                <label for="fechaHasta" class="form-label ms-2">Hasta:</label>
+                <input type="date" id="fechaHasta" class="form-control d-inline" style="width: auto; display: inline-block;">
+                <button type="button" class="btn btn-primary ms-2">Filtrar</button>
+            </div>
+            <button type="button" class="btn btn-success">Generar Reporte</button>
+        </div>
+
+        <table class="table align-middle mb-0">
+            <thead class="bg-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Fecha de Entrada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan Pérez</td>
+                    <td>juan.perezemail.com</td>
+                    <td>2024-09-01</td>
+                </tr>
+                <tr>
+                    <td>María López</td>
+                    <td>maria.lopezemail.com</td>
+                    <td>2024-09-10</td>
+                </tr>
+                <tr>
+                    <td>Carlos Martínez</td>
+                    <td>carlos.martinezemail.com</td>
+                    <td>2024-09-15</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

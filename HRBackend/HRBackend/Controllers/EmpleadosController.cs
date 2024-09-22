@@ -1,6 +1,7 @@
 ﻿using HRBackend.Context;
 using HRBackend.Dtos;
 using HRBackend.Services.Interface;
+using HRBackend.Services.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,13 @@ namespace HRBackend.Controllers
         {
             _empleadoService = empleadoService;
             _authService = authService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EmpleadoDto>>> GetAllEmpleados()
+        {
+            var empleados = await _empleadoService.GetAllEmpleadosAsync();
+            return Ok(empleados);
         }
 
         [HttpPost("login")]
