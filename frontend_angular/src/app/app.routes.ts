@@ -5,9 +5,9 @@ import { CompetenciasComponent } from './components/competencias/competencias.co
 import { IdiomasComponent } from './components/idiomas/idiomas.component';
 import { CapacitacionesComponent } from './components/capacitacioness/capacitaciones.component';
 import { PuestosComponent } from './components/puestos/puestos.component';
-//import { HrDashboardComponent } from './components/hr-dashboard/hr-dashboard.component';
-////import { CandidatoDashboardComponent } from './components/candidato-dashboard/candidato-dashboard.component';
-//import { AuthGuard } from './guards/auth.guard'; 
+import { CapacitacionesformComponent } from './components/capacitacionesform/capacitacionesform.component';
+import { CapacitacionesformcrearComponent } from './components/capacitacionesformcrear/capacitacionesformcrear.component';
+
 
 export const routes: Routes = [
   // Rutas accesibles solo por empleados de HR
@@ -17,6 +17,18 @@ export const routes: Routes = [
    // canActivate: [AuthGuard],
 //data: { roles: ['HR'] }
   //},
+  {
+    path: 'capacitacionesformcrear',
+    component: CapacitacionesformcrearComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  {
+    path: 'capacitacionesform/:id',
+    component: CapacitacionesformComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
   {
     path: 'candidatos',
     component: CandidatosComponent,

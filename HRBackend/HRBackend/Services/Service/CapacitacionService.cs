@@ -21,8 +21,8 @@ namespace HRBackend.Services.Service
             {
                 Descripcion = capacitacionDto.Descripcion,
                 Nivel = capacitacionDto.Nivel,
-                FechaDesde = capacitacionDto.FechaDesde,
-                FechaHasta = capacitacionDto.FechaHasta,
+                FechaDesde = capacitacionDto.FechaDesde.ToUniversalTime(),
+                FechaHasta = capacitacionDto.FechaHasta.ToUniversalTime(),
                 Institucion = capacitacionDto.Institucion
             };
 
@@ -78,7 +78,7 @@ namespace HRBackend.Services.Service
                 FechaDesde = e.FechaDesde,
                 FechaHasta = e.FechaHasta,
                 Institucion = e.Institucion
-            });
+            }).OrderBy(x => x.Id);
         }
 
         // Actualizar una capacitación existente
@@ -93,8 +93,8 @@ namespace HRBackend.Services.Service
             // Actualizar los campos de la entidad
             capacitacion.Descripcion = capacitacionDto.Descripcion;
             capacitacion.Nivel = capacitacionDto.Nivel;
-            capacitacion.FechaDesde = capacitacionDto.FechaDesde;
-            capacitacion.FechaHasta = capacitacionDto.FechaHasta;
+            capacitacion.FechaDesde = capacitacionDto.FechaDesde.ToUniversalTime();
+            capacitacion.FechaHasta = capacitacionDto.FechaHasta.ToUniversalTime();
             capacitacion.Institucion = capacitacionDto.Institucion;
 
              _capacitacionRepository.Update(capacitacion);

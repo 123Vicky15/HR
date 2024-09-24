@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ICapacitaciones } from '../models/interface/Capacitaciones';
+import { Capacitaciones } from '../models/class/Capacitaciones';
 
 @Injectable({
   providedIn: 'root',
@@ -12,23 +12,23 @@ export class CapacitacionService {
   constructor(private http: HttpClient) {}
 
   // Obtener todas las capacitaciones
-  getCapacitaciones(): Observable<ICapacitaciones[]> {
-    return this.http.get<ICapacitaciones[]>(this.apiUrl);
+  getCapacitaciones(): Observable<Capacitaciones[]> {
+    return this.http.get<Capacitaciones[]>(this.apiUrl);
   }
 
   // Obtener una capacitación por ID
-  getCapacitacionById(id: number): Observable<ICapacitaciones> {
-    return this.http.get<ICapacitaciones>(`${this.apiUrl}/${id}`);
+  getCapacitacionById(id: number): Observable<Capacitaciones> {
+    return this.http.get<Capacitaciones>(`${this.apiUrl}/${id}`);
   }
 
   // Crear una nueva capacitación
-  createCapacitacion(capacitacion: ICapacitaciones): Observable<ICapacitaciones> {
-    return this.http.post<ICapacitaciones>(this.apiUrl, capacitacion);
+  createCapacitacion(capacitacion: Capacitaciones): Observable<Capacitaciones> {
+    return this.http.post<Capacitaciones>(this.apiUrl, capacitacion);
   }
 
   // Editar una capacitación existente
-  updateCapacitacion(id: number, capacitacion: ICapacitaciones): Observable<ICapacitaciones> {
-    return this.http.put<ICapacitaciones>(`${this.apiUrl}/${id}`, capacitacion);
+  updateCapacitacion(id: number, capacitacion: Capacitaciones): Observable<Capacitaciones> {
+    return this.http.put<Capacitaciones>(`${this.apiUrl}/${id}`, capacitacion);
   }
 
   // Eliminar una capacitación

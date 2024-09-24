@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Capacitaciones</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+   <div class="container mt-4">
+    <h2>Formulario de Capacitación</h2>
+    <form #form="ngForm" (ngSubmit)="onUpdateCapacitacion(form)">
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" [(ngModel)]="capacitacionesObj.descripcion" name="descripcion" class="form-control" id="descripcion" placeholder="Descripción de la capacitación" required>
+        </div>
+        <div class="mb-3">
+            <label for="nivel" class="form-label">Nivel</label>
+            <select [(ngModel)]="capacitacionesObj.nivel" name="nivel" class="form-select" id="nivel" required>
+                <option value="">Seleccione un nivel</option>
+                <option value="Grado">Grado</option>
+                <option value="Post-grado">Post-grado</option>
+                <option value="Maestría">Maestría</option>
+                <option value="Doctorado">Doctorado</option>
+                <option value="Técnico">Técnico</option>
+                <option value="Gestión">Gestión</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="fechaDesde" class="form-label">Fecha Desde</label>
+            <input type="date" [(ngModel)]="capacitacionesObj.fechaDesde" name="fechaDesde" class="form-control" id="fechaDesde" required>
+        </div>
+        <div class="mb-3">
+            <label for="fechaHasta" class="form-label">Fecha Hasta</label>
+            <input type="date" [(ngModel)]="capacitacionesObj.fechaHasta" name="fechaHasta" class="form-control" id="fechaHasta" required>
+        </div>
+        <div class="mb-3">
+            <label for="institucion" class="form-label">Institución</label>
+            <input type="text" [(ngModel)]="capacitacionesObj.institucion" name="institucion" class="form-control" id="institucion" placeholder="Nombre de la institución" required>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="reset" class="btn btn-secondary">Borrar</button>
+            <input type="hidden" [(ngModel)]="capacitacionesObj.id" name="id" />
+
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

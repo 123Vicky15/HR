@@ -1,0 +1,75 @@
+.gradient-custom {
+    /* Fondo gris oscuro */
+    background: #2e2e2e;
+    background: -webkit-linear-gradient(to bottom right, rgba(46, 46, 46, 1), rgba(30, 30, 30, 1));
+    background: linear-gradient(to bottom right, rgba(46, 46, 46, 1), rgba(30, 30, 30, 1));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Letra blanca */
+  }
+  
+  .card-registration {
+    background-color: #424242; /* Fondo de la tarjeta gris oscuro */
+    border-radius: 15px;
+    color: #ffffff;
+    width: 100%; /* Ajusta el tamaño de la tarjeta */
+    max-width: 500px; /* Limita el ancho de la tarjeta */
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+  
+  .card-registration .form-control {
+    background-color: #333333; /* Fondo oscuro para los inputs */
+    color: #ffffff; /* Texto blanco en los inputs */
+    border: 1px solid #757575; /* Borde gris oscuro */
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+  }
+  
+  .card-registration .form-control:focus {
+    background-color: #444444; /* Fondo más claro al enfocarse */
+    border-color: #ff4081; /* Borde rosado */
+    box-shadow: none;
+  }
+  
+  .card-registration .form-label {
+    font-size: 1.2rem;
+    color: #ffcccb; /* Color rosado suave para las etiquetas */
+    font-weight: bold;
+  }
+  
+  .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    background-color: #333333;
+  }
+  
+  .card-registration .select-arrow {
+    top: 13px;
+  }
+  
+  .btn-primary {
+    background-color: #ff4081; /* Botón con color primario rosado */
+    border-color: #ff4081;
+    font-size: 1.1rem;
+    padding: 10px 30px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .btn-primary:hover {
+    background-color: #ff669a; /* Hover del botón */
+    border-color: #ff669a;
+  }
+  
+  h3 {
+    color: #ffcccb; /* Título en rosado suave */
+    font-weight: bold;
+    text-align: center;
+  }
+  
