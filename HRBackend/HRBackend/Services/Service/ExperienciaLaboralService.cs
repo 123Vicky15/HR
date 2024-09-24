@@ -45,7 +45,7 @@ namespace HRBackend.Services.Service
                 FechaDesde = e.FechaDesde,
                 FechaHasta = e.FechaHasta,
                 Salario = e.Salario
-            });
+            }).OrderBy(x => x.Id);
         }
 
         public async Task AddExperienciaLaboralAsync(ExperienciaLaboralDto experienciaDto)

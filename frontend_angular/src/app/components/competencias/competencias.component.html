@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Listado de Competencias</h2>
-            <button class="btn btn-primary">Crear Competencia</button>
+            <button class="btn btn-primary" routerLink="/competenciasformcrear">Crear Competencia</button>
         </div>
         <table class="table align-middle mb-0 bg-white mt-3">
             <thead class="bg-light">
@@ -22,50 +22,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let competencia of competenciasList">
                     <td>
-                        <p class="fw-bold mb-1">Trabajo en Equipo</p>
+                        <p class="fw-bold mb-1">{{ competencia.descripcion }}</p>
                     </td>
                     <td>
-                        <span class="badge bg-success">Activo</span>
+                        <span class="badge" [ngClass]="competencia.estado ? 'bg-success' : 'bg-danger'">
+                            {{ competencia.estado ? 'Activo' : 'Inactivo' }}
+                        </span>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver">
-                            <i class="bi bi-eye"></i>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Editar" (click)="goToEditForm(competencia.id)">
+                            <i class="bi bi-pencil"></i>
                         </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p class="fw-bold mb-1">Liderazgo</p>
-                    </td>
-                    <td>
-                        <span class="badge bg-danger">Inactivo</span>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p class="fw-bold mb-1">Comunicación</p>
-                    </td>
-                    <td>
-                        <span class="badge bg-success">Activo</span>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
+                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar" (click)="deleteCompetencias(competencia.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>

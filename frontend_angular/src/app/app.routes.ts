@@ -7,6 +7,10 @@ import { CapacitacionesComponent } from './components/capacitacioness/capacitaci
 import { PuestosComponent } from './components/puestos/puestos.component';
 import { CapacitacionesformComponent } from './components/capacitacionesform/capacitacionesform.component';
 import { CapacitacionesformcrearComponent } from './components/capacitacionesformcrear/capacitacionesformcrear.component';
+import { CompetenciasformcrearComponent } from './components/competenciasformcrear/competenciasformcrear.component';
+import { CompetenciasformeditarComponent } from './components/competenciasformeditar/competenciasformeditar.component';
+
+
 
 
 export const routes: Routes = [
@@ -17,6 +21,20 @@ export const routes: Routes = [
    // canActivate: [AuthGuard],
 //data: { roles: ['HR'] }
   //},
+  { path: 'competenciasformeditar/:id', 
+    component: CompetenciasformeditarComponent },
+  {
+    path: 'competenciasformcrear',
+    component: CompetenciasformcrearComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  {
+    path: 'competenciasformeditar',
+    component: CompetenciasformeditarComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
   {
     path: 'capacitacionesformcrear',
     component: CapacitacionesformcrearComponent,

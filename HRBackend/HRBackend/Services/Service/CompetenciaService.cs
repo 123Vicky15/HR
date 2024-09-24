@@ -39,7 +39,7 @@ namespace HRBackend.Services.Service
                 Id = c.Id,
                 Descripcion = c.Descripcion,
                 Estado = c.Estado
-            });
+            }).OrderBy(x => x.Id);
         }
 
         public async Task AddCompetenciaAsync(CompetenciaDto competenciaDto)

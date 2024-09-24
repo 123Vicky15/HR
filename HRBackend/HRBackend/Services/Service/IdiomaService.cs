@@ -39,7 +39,7 @@ namespace HRBackend.Services.Service
                 Id = i.Id,
                 Nombre = i.Nombre,
                 Estado = i.Estado
-            });
+            }).OrderBy(x => x.Id);
         }
 
         public async Task AddIdiomaAsync(IdiomaDto idiomaDto)

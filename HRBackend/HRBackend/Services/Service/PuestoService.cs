@@ -45,7 +45,7 @@ namespace HRBackend.Services.Service
                 NivelMinimoSalario = p.NivelMinimoSalario,
                 NivelMaximoSalario = p.NivelMaximoSalario,
                 Estado = p.Estado
-            });
+            }).OrderBy(x => x.Id);
         }
 
         public async Task AddPuestoAsync(PuestoDto puestoDto)

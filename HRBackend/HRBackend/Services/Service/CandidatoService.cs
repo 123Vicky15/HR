@@ -54,7 +54,7 @@ namespace HRBackend.Services.Service
                 PrincipalesCapacitaciones = e.PrincipalesCapacitaciones,
                 ExperienciaLaboral = e.ExperienciaLaboral,
                 RecomendadoPor = e.RecomendadoPor
-            });
+            }).OrderBy(x => x.Id);
         }
         //public async Task AddCandidatoAsync(CandidatoDto candidatoDto) { }
         //public async Task UpdateCandidatoAsync(int id, CandidatoDto candidatoDto){}

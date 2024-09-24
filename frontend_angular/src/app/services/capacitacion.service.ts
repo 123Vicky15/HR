@@ -7,8 +7,7 @@ import { Capacitaciones } from '../models/class/Capacitaciones';
   providedIn: 'root',
 })
 export class CapacitacionService {
-  private apiUrl = 'https://localhost:7021/api/Capacitacion'; // Reemplaza con tu URL de la API
-
+  private apiUrl = 'https://localhost:7021/api/Capacitacion'; 
   constructor(private http: HttpClient) {}
 
   // Obtener todas las capacitaciones

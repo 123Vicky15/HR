@@ -51,7 +51,7 @@ namespace HRBackend.Services.Service
                 Puesto = e.Puesto,
                 SalarioMensual = e.SalarioMensual,
                 Estado = e.Estado
-            });
+            }).OrderBy(x => x.Id);
         }
 
     }
