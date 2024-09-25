@@ -2,13 +2,15 @@ import { Routes } from '@angular/router';
 import { CandidatosComponent } from './components/candidatos/candidatos.component';
 import { EmpleadosComponent } from './components/empleados/empleados.component';
 import { CompetenciasComponent } from './components/competencias/competencias.component';
-import { IdiomasComponent } from './components/idiomas/idiomas.component';
 import { CapacitacionesComponent } from './components/capacitacioness/capacitaciones.component';
 import { PuestosComponent } from './components/puestos/puestos.component';
 import { CapacitacionesformComponent } from './components/capacitacionesform/capacitacionesform.component';
 import { CapacitacionesformcrearComponent } from './components/capacitacionesformcrear/capacitacionesformcrear.component';
 import { CompetenciasformcrearComponent } from './components/competenciasformcrear/competenciasformcrear.component';
 import { CompetenciasformeditarComponent } from './components/competenciasformeditar/competenciasformeditar.component';
+import { IdiomaseditarComponent } from './components/idiomaseditar/idiomaseditar.component';
+import { IdiomasComponent } from './components/idiomas/idiomas.component';
+import { IdiomascrearComponent } from './components/idiomascrear/idiomascrear.component';
 
 
 
@@ -21,8 +23,26 @@ export const routes: Routes = [
    // canActivate: [AuthGuard],
 //data: { roles: ['HR'] }
   //},
-  { path: 'competenciasformeditar/:id', 
-    component: CompetenciasformeditarComponent },
+  {
+    path: 'idiomaseditar',
+    component: IdiomaseditarComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },  
+  {
+    path: 'idiomascrear',
+    component: IdiomascrearComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  { 
+    path: 'idiomaseditar/:id', 
+    component: IdiomaseditarComponent, 
+  },
+  { 
+    path: 'competenciasformeditar/:id', 
+    component: CompetenciasformeditarComponent,
+  },
   {
     path: 'competenciasformcrear',
     component: CompetenciasformcrearComponent,

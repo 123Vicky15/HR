@@ -36,11 +36,11 @@ export class CompetenciasformeditarComponent implements OnInit {
     if (form.valid) {
       this.competenciasService.updateCompetencia(this.id, this.competenciasObj).subscribe(
         res => {
-          console.log('Capacitación actualizada exitosamente');
-          this.router.navigate(['/capacitaciones']);
+          console.log('Competencia actualizada exitosamente');
+          this.router.navigate(['/competencias']);
         },
         error => {
-          console.error('Error al actualizar capacitación', error);
+          console.error('Error al actualizar la competencia', error);
         }
       );
     }

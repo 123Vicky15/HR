@@ -20,13 +20,13 @@ export class CompetenciaService {
   }
 
   // Crear una nueva capacitación
-  createCompetencia(capacitacion: Competencias): Observable<Competencias> {
-    return this.http.post<Competencias>(this.apiUrl, capacitacion);
+  createCompetencia(competencia: Competencias): Observable<Competencias> {
+    return this.http.post<Competencias>(this.apiUrl, competencia);
   }
 
   // Editar una capacitación existente
-  updateCompetencia(id: number, capacitacion: Competencias): Observable<Competencias> {
-    return this.http.put<Competencias>(`${this.apiUrl}/${id}`, capacitacion);
+  updateCompetencia(id: number, competencia: Competencias): Observable<Competencias> {
+    return this.http.put<Competencias>(`${this.apiUrl}/${id}`, competencia);
   }
 
   // Eliminar una capacitación
