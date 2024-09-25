@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { Competencias } from '../../models/class/Competencias';
 import { CompetenciaService } from '../../services/competencia.service';
 import { NgForm } from '@angular/forms';
@@ -19,14 +17,14 @@ export class CompetenciasformcrearComponent implements OnInit{
   competenciasObj: Competencias = new Competencias();
   competenciasList: Competencias[] = [];
   
-  capacitacionesService = inject(CompetenciaService);
+  competenciasService = inject(CompetenciaService);
 
   onEstadoChange(value: any) {
     this.competenciasObj.estado = value === 'true';  // Asegura que el valor sea booleano
   }
 
   onCreateCompetencia(form: NgForm) {
-    this.capacitacionesService.createCompetencia(this.competenciasObj).subscribe({
+    this.competenciasService.createCompetencia(this.competenciasObj).subscribe({
       next: (res: any) => {
         console.log('Capacitación creada:', res);
         this.competenciasList.push(res); // Añade la nueva capacitación a la lista

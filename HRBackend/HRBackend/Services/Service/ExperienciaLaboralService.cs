@@ -54,8 +54,8 @@ namespace HRBackend.Services.Service
             {
                 Empresa = experienciaDto.Empresa,
                 PuestoOcupado = experienciaDto.PuestoOcupado,
-                FechaDesde = experienciaDto.FechaDesde,
-                FechaHasta = experienciaDto.FechaHasta,
+                FechaDesde = experienciaDto.FechaDesde.ToUniversalTime(),
+                FechaHasta = experienciaDto.FechaHasta.ToUniversalTime(),
                 Salario = experienciaDto.Salario
             };
 
@@ -73,8 +73,8 @@ namespace HRBackend.Services.Service
             // Actualizar los campos
             experienciaLaboral.Empresa = experienciaDto.Empresa;
             experienciaLaboral.PuestoOcupado = experienciaDto.PuestoOcupado;
-            experienciaLaboral.FechaDesde = experienciaDto.FechaDesde;
-            experienciaLaboral.FechaHasta = experienciaDto.FechaHasta;
+            experienciaLaboral.FechaDesde = experienciaDto.FechaDesde.ToUniversalTime();
+            experienciaLaboral.FechaHasta = experienciaDto.FechaHasta.ToUniversalTime();
             experienciaLaboral.Salario = experienciaDto.Salario;
 
             _experienciaLaboralRepository.Update(experienciaLaboral);

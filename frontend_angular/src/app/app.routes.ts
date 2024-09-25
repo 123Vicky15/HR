@@ -11,11 +11,20 @@ import { CompetenciasformeditarComponent } from './components/competenciasformed
 import { IdiomaseditarComponent } from './components/idiomaseditar/idiomaseditar.component';
 import { IdiomasComponent } from './components/idiomas/idiomas.component';
 import { IdiomascrearComponent } from './components/idiomascrear/idiomascrear.component';
+import { ExperienciaLaboralCrearComponent } from './components/experiencia-laboralcrear/experiencia-laboralcrear.component';
 
 
 
 
 export const routes: Routes = [
+
+  {
+    path: 'experiencia-laboralcrear',
+    component: ExperienciaLaboralCrearComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+
   // Rutas accesibles solo por empleados de HR
 // {
  //   path: 'hr-dashboard',
