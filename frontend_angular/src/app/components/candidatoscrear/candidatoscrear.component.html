@@ -1,0 +1,132 @@
+<div class="form-container">
+    <div class="form-candidato">
+      <h2>Ingresa tus datos</h2>
+      <form #candidatoForm="ngForm" (ngSubmit)="onCreateCandidato(candidatoForm)">
+        <div>
+          <label for="cedula">Cédula:</label>
+          <input
+            type="text"
+            id="cedula"
+            name="cedula"
+            [(ngModel)]="candidatolObj.cedula"
+            required
+            #cedula="ngModel"
+          />
+          <div *ngIf="cedula.invalid && cedula.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            [(ngModel)]="candidatolObj.nombre"
+            required
+            #nombre="ngModel"
+          />
+          <div *ngIf="nombre.invalid && nombre.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <div>
+          <label for="puestoAspira">Puesto Aspirado:</label>
+          <input
+            type="text"
+            id="puestoAspira"
+            name="puestoAspira"
+            [(ngModel)]="candidatolObj.puestoAspira"
+            required
+            #puestoAspira="ngModel"
+          />
+          <div *ngIf="puestoAspira.invalid && puestoAspira.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <div>
+          <label for="departamento">Departamento:</label>
+          <input
+            type="text"
+            id="departamento"
+            name="departamento"
+            [(ngModel)]="candidatolObj.departamento"
+            required
+            #departamento="ngModel"
+          />
+          <div *ngIf="departamento.invalid && departamento.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <div>
+          <label for="salarioAspira">Salario Aspirado:</label>
+          <input
+            type="number"
+            id="salarioAspira"
+            name="salarioAspira"
+            [(ngModel)]="candidatolObj.salarioAspira"
+            min="0"
+            required
+            #salarioAspira="ngModel"
+          />
+          <div *ngIf="salarioAspira.invalid && salarioAspira.touched" class="error">
+            Este campo es obligatorio y debe ser un número mayor a 0
+          </div>
+        </div>
+  
+        <div>
+          <label for="competencias">Principales Competencias:</label>
+          <input
+            type="text"
+            id="competencias"
+            name="competencias"
+            [(ngModel)]="candidatolObj.principalesCompetencias"
+            required
+            #competencias="ngModel"
+          />
+          <div *ngIf="competencias.invalid && competencias.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <div>
+          <label for="capacitaciones">Principales Capacitaciones:</label>
+          <input
+            type="text"
+            id="capacitaciones"
+            name="capacitaciones"
+            [(ngModel)]="candidatolObj.principalesCapacitaciones"
+            required
+            #capacitaciones="ngModel"
+          />
+          <div *ngIf="capacitaciones.invalid && capacitaciones.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <div>
+          <label for="recomendadoPor">Recomendado Por:</label>
+          <input
+            type="text"
+            id="recomendadoPor"
+            name="recomendadoPor"
+            [(ngModel)]="candidatolObj.recomendadoPor"
+            required
+            #recomendadoPor="ngModel"
+          />
+          <div *ngIf="recomendadoPor.invalid && recomendadoPor.touched" class="error">
+            Este campo es obligatorio
+          </div>
+        </div>
+  
+        <button type="submit" [disabled]="candidatoForm.invalid">
+          Crear Candidato
+        </button>
+      </form>
+    </div>
+  </div>
+  

@@ -37,7 +37,15 @@ export class ExperienciaLaboralCrearComponent implements OnInit {
     });
   }
 
-
+  validarFechas() {
+    const fechaDesde = new Date(this.experienciaLaboralObj.fechaDesde);
+    const fechaHasta = new Date(this.experienciaLaboralObj.fechaHasta);
+  
+    if (fechaHasta < fechaDesde) {
+      alert("La fecha 'hasta' no puede ser anterior a la fecha 'desde'.");
+      this.experienciaLaboralObj.fechaHasta = ''; // Resetea la fecha 'hasta'
+    }
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];

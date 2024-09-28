@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Idiomas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Listado de Puestos</h2>
+            <button class="btn btn-primary" routerLink="/puestoscrear">Crear Idioma</button>
+        </div>
+        <table class="table align-middle mb-0 bg-white mt-3">
+            <thead class="bg-light">
+                <tr>
+                    <th>Nombre del Puesto</th>
+                    <th>Nivel de Riesgo</th>
+                    <th>Salario Minimo</th>
+                    <th>Salario Maximo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let puesto of puestoList">
+                    <td>
+                        <p class="fw-bold mb-1">{{ puesto.nombre }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1">{{ puesto.nivelRiegos }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1">{{ puesto.nivelMinimoSalario }}</p>
+                    </td>
+                    <td>
+                        <p class="fw-bold mb-1">{{ puesto.nivelMaximoSalario }}</p>
+                    </td>
+                    <td>
+                        <span class="badge" [ngClass]="puesto.estado ? 'bg-success' : 'bg-danger'">
+                            {{ puesto.estado ? 'Activo' : 'Inactivo' }}
+                        </span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Editar" (click)="goToEditForm(puesto.id)">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar" (click)="deletePuestos(puesto.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

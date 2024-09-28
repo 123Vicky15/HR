@@ -65,6 +65,17 @@ namespace HRBackend.Controllers
             return BadRequest(new { message = "Error en el registro" });
         }
 
+        [HttpPost("re")]
+        public async Task<IActionResult> RegistrarCandidatoAsync(CandidatoDto candidatoDto)
+        {
+            var resultado = await _candidatoService.RegistrarCandidatoAsync(candidatoDto);
+            if (resultado)
+            {
+                return Ok(new { message = "Registro exitoso" });
+            }
+            return BadRequest(new { message = "Error en el registro" });
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCandidato(int id)
         {

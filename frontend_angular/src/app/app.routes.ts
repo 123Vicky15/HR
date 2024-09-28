@@ -3,7 +3,6 @@ import { CandidatosComponent } from './components/candidatos/candidatos.componen
 import { EmpleadosComponent } from './components/empleados/empleados.component';
 import { CompetenciasComponent } from './components/competencias/competencias.component';
 import { CapacitacionesComponent } from './components/capacitacioness/capacitaciones.component';
-import { PuestosComponent } from './components/puestos/puestos.component';
 import { CapacitacionesformComponent } from './components/capacitacionesform/capacitacionesform.component';
 import { CapacitacionesformcrearComponent } from './components/capacitacionesformcrear/capacitacionesformcrear.component';
 import { CompetenciasformcrearComponent } from './components/competenciasformcrear/competenciasformcrear.component';
@@ -12,6 +11,13 @@ import { IdiomaseditarComponent } from './components/idiomaseditar/idiomaseditar
 import { IdiomasComponent } from './components/idiomas/idiomas.component';
 import { IdiomascrearComponent } from './components/idiomascrear/idiomascrear.component';
 import { ExperienciaLaboralCrearComponent } from './components/experiencia-laboralcrear/experiencia-laboralcrear.component';
+import { CandidatoscrearComponent } from './components/candidatoscrear/candidatoscrear.component';
+import { PuestosComponent } from './components/puestos/puestos.component';
+import { PuestoeditarComponent } from './components/puestoeditar/puestoeditar.component';
+import { PuestosCrearComponent } from './components/puestoscrear/puestoscrear.component';
+import { PuestosverComponent } from './components/puestosver/puestosver.component';
+import { EmpleadosdetallesComponent } from './components/empleadosdetalles/empleadosdetalles.component';
+
 
 
 
@@ -77,6 +83,12 @@ export const routes: Routes = [
   //  data: { roles: ['HR'] }
   },
   {
+    path: 'candidatoscrear',
+    component: CandidatoscrearComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  {
     path: 'candidatos',
     component: CandidatosComponent,
  //   canActivate: [AuthGuard],
@@ -87,6 +99,12 @@ export const routes: Routes = [
     component: EmpleadosComponent,
  //   canActivate: [AuthGuard],
  //   data: { roles: ['HR'] }
+  },
+  {
+    path: 'empleadosdetalles',
+    component: EmpleadosdetallesComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
   },
   {
     path: 'competencias',
@@ -109,6 +127,24 @@ export const routes: Routes = [
   {
     path: 'puestos',
     component: PuestosComponent,
+  //  canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  {
+    path: 'puestosvercomponent',
+    component: PuestosverComponent,
+  //  canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  {
+    path: 'puestoseditarcomponent',
+    component: PuestoeditarComponent,
+  //  canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
+  {
+    path: 'puestoscrearcomponent',
+    component: PuestosCrearComponent,
   //  canActivate: [AuthGuard],
   //  data: { roles: ['HR'] }
   },

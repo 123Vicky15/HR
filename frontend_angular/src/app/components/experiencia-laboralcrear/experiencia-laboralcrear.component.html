@@ -25,7 +25,7 @@
         </div>
         <div class="mb-3">
             <label for="fechaHasta" class="form-label">Fecha Hasta</label>
-            <input type="date" [(ngModel)]="experienciaLaboralObj.fechaHasta" name="fechaHasta" class="form-control" id="fechaHasta" required>
+            <input type="date" [(ngModel)]="experienciaLaboralObj.fechaHasta" name="fechaHasta" class="form-control" id="fechaHasta" (change)="validarFechas()" required>
         </div>
         <div class="mb-3">
             <label for="salario" class="form-label">Salario</label>

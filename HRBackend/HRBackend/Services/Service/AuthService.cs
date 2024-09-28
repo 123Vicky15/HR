@@ -28,10 +28,10 @@ namespace HRBackend.Services.Service
                 SalarioAspira = candidatoDto.SalarioAspira,
                 PrincipalesCompetencias = candidatoDto.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = candidatoDto.PrincipalesCapacitaciones,
-                ExperienciaLaboral = candidatoDto.ExperienciaLaboral,
+                //ExperienciaLaboral = candidatoDto.ExperienciaLaboral,
                 RecomendadoPor = candidatoDto.RecomendadoPor,
-                Correo = candidatoDto.Correo,
-                Clave = _candidatoRepository.EncriptarClave(candidatoDto.Clave)
+                //Correo = candidatoDto.Correo,
+                //Clave = _candidatoRepository.EncriptarClave(candidatoDto.Clave)
             };
 
             await _candidatoRepository.AddAsync(candidato);
@@ -49,14 +49,14 @@ namespace HRBackend.Services.Service
                 Id = empleado.Id,
                 Nombre = empleado.Nombre,
                 Cedula = empleado.Cedula,
-                Correo = empleado.Correo,
-                Clave = empleado.Clave,
+                //Correo = empleado.Correo,
+                //Clave = empleado.Clave,
                 FechaIngreso = empleado.FechaIngreso,
                 Departamento = empleado.Departamento,
                 Puesto = empleado.Puesto,
                 SalarioMensual = empleado.SalarioMensual,
                 Estado = empleado.Estado,
-                Rol = empleado.Rol
+                //Rol = empleado.Rol
             };
          }
 
@@ -75,11 +75,11 @@ namespace HRBackend.Services.Service
                 SalarioAspira = candidato.SalarioAspira,
                 PrincipalesCompetencias = candidato.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = candidato.PrincipalesCapacitaciones,
-                ExperienciaLaboral = candidato.ExperienciaLaboral,
+                //ExperienciaLaboral = candidato.ExperienciaLaboral,
                 RecomendadoPor = candidato.RecomendadoPor,
-                Correo = candidato.Correo,
-                Clave = candidato.Clave
+                //Correo = candidato.Correo,
+                //Clave = candidato.Clave
             };
-        }
+        } 
     }
 }

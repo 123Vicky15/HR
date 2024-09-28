@@ -11,10 +11,12 @@ namespace HRBackend.Services.Service
     public class CandidatoService : ICandidatoService
     {
         private readonly ICandidatoRepository _candidatoRepository;
+        private readonly IExperienciaLaboralRepository _experienciaRepository;
 
-        public CandidatoService(ICandidatoRepository candidatoRepository)
+        public CandidatoService(ICandidatoRepository candidatoRepository, IExperienciaLaboralRepository experienciaRepository)
         {
             _candidatoRepository = candidatoRepository;
+            _experienciaRepository = experienciaRepository;
         }
         public async Task<CandidatoDto> GetCandidatoByIdAsync(int id)
         {
@@ -23,6 +25,8 @@ namespace HRBackend.Services.Service
             {
                 return null;
             }
+
+            var experiencias = await _experienciaRepository.GetExperienciasByCandidatoIdAsync(candidato.Id);
 
             return new CandidatoDto
             {
@@ -34,8 +38,17 @@ namespace HRBackend.Services.Service
                 SalarioAspira = candidato.SalarioAspira,
                 PrincipalesCompetencias = candidato.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = candidato.PrincipalesCapacitaciones,
-                ExperienciaLaboral = candidato.ExperienciaLaboral,
-                RecomendadoPor = candidato.RecomendadoPor
+                RecomendadoPor = candidato.RecomendadoPor,
+                // Mapear experiencias
+                ExperienciaLaboralDto = experiencias.Select(e => new ExperienciaLaboralDto
+                {
+                    Id = e.Id,
+                    PuestoOcupado = e.PuestoOcupado,
+                    Empresa = e.Empresa,
+                    FechaDesde = e.FechaDesde.ToUniversalTime(),
+                    FechaHasta = e.FechaHasta.ToUniversalTime(),
+                    Salario = e.Salario
+                }).ToList(),
             };
         }
         public async Task<IEnumerable<CandidatoDto>> GetAllCandidatosAsync()
@@ -52,7 +65,7 @@ namespace HRBackend.Services.Service
                 SalarioAspira = e.SalarioAspira,
                 PrincipalesCompetencias = e.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = e.PrincipalesCapacitaciones,
-                ExperienciaLaboral = e.ExperienciaLaboral,
+                //ExperienciaLaboral = e.ExperienciaLaboral,
                 RecomendadoPor = e.RecomendadoPor
             }).OrderBy(x => x.Id);
         }
@@ -65,7 +78,11 @@ namespace HRBackend.Services.Service
             {
                 throw new KeyNotFoundException($"El candidato con ID {id} no existe.");
             }
-
+            var experiencias = await _experienciaRepository.GetExperienciasByCandidatoIdAsync(id);
+            foreach (var experiencia in experiencias)
+            {
+                 _experienciaRepository.Delete(experiencia);
+            }
             _candidatoRepository.Delete(candidato);
 
         }
@@ -80,11 +97,24 @@ namespace HRBackend.Services.Service
                 SalarioAspira = candidatoDto.SalarioAspira,
                 PrincipalesCompetencias = candidatoDto.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = candidatoDto.PrincipalesCapacitaciones,
-                ExperienciaLaboral = candidatoDto.ExperienciaLaboral,
+                //ExperienciaLaboral = candidatoDto.ExperienciaLaboral,
                 RecomendadoPor = candidatoDto.RecomendadoPor
 
             };
             await _candidatoRepository.AddAsync(candidato);
+            foreach (var experienciaLaboralDto in candidatoDto.ExperienciaLaboralDto)
+            {
+                var experienciaLaboral = new ExperienciaLaboral
+                {
+                    PuestoOcupado = experienciaLaboralDto.PuestoOcupado,
+                    Empresa = experienciaLaboralDto.Empresa,
+                    FechaDesde = experienciaLaboralDto.FechaDesde,
+                    FechaHasta = experienciaLaboralDto.FechaHasta,
+                    Salario = experienciaLaboralDto.Salario,
+                    Id = candidato.Id // Usar el ID del candidato recién creado
+                };
+                await _experienciaRepository.AddAsync(experienciaLaboral);
+            }
             return true;
 
         }

@@ -8,6 +8,5 @@ namespace HRBackend.Services.Interface
         Task<EmpleadoDto> LoginEmpleado(LoginDto loginDto);
         Task<CandidatoDto> LoginCandidato(LoginDto loginDto);
         Task<CandidatoDto> RegisterCandidato(CandidatoDto candidatoDto);
-
     }
 }

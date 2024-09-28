@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,13 +14,14 @@
             <thead class="bg-light">
                 <tr>
                     <th>Nombre</th>
-                    <th>Correo</th>
+                    <th>Cedula</th>
                     <th>Puesto al que Aspira</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- Usamos *ngFor para iterar sobre la lista de candidatos -->
+                <tr *ngFor="let candidato of candidatoList">
                     <td>
                         <div class="d-flex align-items-center">
                             <img
@@ -30,79 +31,23 @@
                                 class="rounded-circle"
                             />
                             <div class="ms-3">
-                                <p class="fw-bold mb-1">Juan Pérez</p>
+                                <p class="fw-bold mb-1">{{ candidato.nombre }}</p>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <p class="text-muted mb-0">juan.perezgmail.com</p>
+                        <p class="text-muted mb-0">{{ candidatoObj.cedula }}</p>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1">Desarrollador Web</p>
+                        <p class="fw-normal mb-1">{{ candidatoObj.puestoAspira }}</p>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver">
+                        <!-- Botón para ver detalles -->
+                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver" (click)="verCandidato(candidato.id)">
                             <i class="bi bi-eye"></i>
                         </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                                class="rounded-circle"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                            />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">Ana Gómez</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="text-muted mb-0">ana.gomezgmail.com</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Diseñadora Gráfica</p>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img
-                                src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                                class="rounded-circle"
-                                alt=""
-                                style="width: 45px; height: 45px"
-                            />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">Carlos López</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="text-muted mb-0">carlos.lopezgmail.com</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">Gerente de Proyecto</p>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar">
+                        <!-- Botón para eliminar candidato -->
+                        <button type="button" class="btn btn-link btn-sm btn-rounded text-danger" title="Eliminar" (click)="eliminarCandidato(candidato.id)">
                             <i class="bi bi-trash"></i>
                         </button>
                     </td>

@@ -1,99 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Puestos</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-</head>
-<body>
-    <div class="container mt-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Listado de Puestos</h2>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPuestoModal">
-                Crear Nuevo Puesto
+<div class="container mt-4">
+    <h2>Lista de Puestos</h2>
+  
+    <div class="row">
+      <div class="col-md-4" *ngFor="let puesto of puestosList">
+        <div class="card mb-4" [ngClass]="{'border-success': puesto.id === selectedPuestoId}">
+          <div class="card-body">
+            <h5 class="card-title">{{ puesto.nombre }}</h5>
+            <p class="card-text">{{ puesto.nivelRiegos }}</p>
+            <p class="card-text">{{ puesto.nivelMinimoSalario }}</p>
+            <p class="card-text">{{ puesto.nivelMaximoSalario }}</p>
+            <button class="btn btn-primary btn-sm" (click)="selectPuesto(puesto.id)">
+              {{ puesto.id === selectedPuestoId ? 'Deseleccionar' : 'Seleccionar' }}
             </button>
+          </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Desarrollador Web</h5>
-                        <p class="card-text">Responsable del desarrollo y mantenimiento de aplicaciones web.</p>
-                        <button class="btn btn-success btn-sm mb-2">Activar <i class="bi bi-check"></i></button>
-                        <button class="btn btn-info btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#editPuestoModal">Editar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Diseñador Gráfico</h5>
-                        <p class="card-text">Encargado de crear diseños visuales para diversas plataformas.</p>
-                        <button class="btn btn-danger btn-sm mb-2">Desactivar <i class="bi bi-x"></i></button>
-                        <button class="btn btn-info btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#editPuestoModal">Editar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Gerente de Proyecto</h5>
-                        <p class="card-text">Responsable de la planificación y ejecución de proyectos.</p>
-                        <button class="btn btn-success btn-sm mb-2">Activar <i class="bi bi-check"></i></button>
-                        <button class="btn btn-info btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#editPuestoModal">Editar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
-
-    <!-- Modal para Crear Nuevo Puesto -->
-    <div class="modal fade" id="createPuestoModal" tabindex="-1" aria-labelledby="createPuestoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createPuestoModalLabel">Crear Nuevo Puesto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="puestoNombre" class="form-label">Nombre del Puesto</label>
-                            <input type="text" class="form-control" id="puestoNombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="puestoDescripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="puestoDescripcion" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nivelRiesgo" class="form-label">Nivel de Riesgo</label>
-                            <select class="form-select" id="nivelRiesgo" required>
-                                <option value="">Seleccione</option>
-                                <option value="Alto">Alto</option>
-                                <option value="Medio">Medio</option>
-                                <option value="Bajo">Bajo</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Crear Puesto</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para Editar Puesto -->
-    <div class="modal fade" id="editPuestoModal" tabindex="-1" aria-labelledby="editPuestoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editPuestoModalLabel">Editar Puesto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+  
+    <button class="btn btn-success" (click)="solicitarPuesto()">Solicitar Puesto</button>
+  </div>
+  
