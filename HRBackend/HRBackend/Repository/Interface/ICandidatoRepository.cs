@@ -6,5 +6,6 @@ namespace HRBackend.Repository.Interface
     {
         Task<Candidato> GetEmpleadoByClaveAndNombreAsync(string nombre, string cedula);
         string EncriptarClave(string clase);
+        bool ValidaCedula(string cedula);
     }
 }

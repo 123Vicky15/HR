@@ -8,6 +8,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdiomaService } from '../../services/idioma.service';  // Servicio para obtener los idiomas
 import { CompetenciaService } from '../../services/competencia.service'; // Servicio para competencias
 import { CapacitacionService } from '../../services/capacitacion.service';
+import { Idiomas } from '../../models/class/Idiomas';
+import { Competencias } from '../../models/class/Competencias';
+import { Capacitaciones } from '../../models/class/Capacitaciones';
 @Component({
   selector: 'app-candidatoscrear',
   standalone: true,
@@ -16,29 +19,65 @@ import { CapacitacionService } from '../../services/capacitacion.service';
   styleUrls: ['./candidatoscrear.component.css'] // Cambiado de styleUrl a styleUrls
 })
 export class CandidatoscrearComponent implements OnInit {
-  candidatolObj: Candidato = new Candidato();
-  candidatosList: Candidato[] = [];
+  candidatoObj: Candidato = new Candidato();
   
-  candidatoService = inject(CandidatoService);
-  id: number = 0;
+  idiomasList: Idiomas[] = [];              // Lista de idiomas
+  competenciasList: Competencias[] = [];         // Lista de competencias
+  capacitacionesList: Capacitaciones[] = [];       // Lista de capacitaciones
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
-  onCreateCandidato(form: NgForm) {
-    
-    this.candidatoService.createCandidato(this.candidatolObj).subscribe({
-      next: (res: any) => {
-        console.log('Candidato creado:', res);
-        this.candidatosList.push(res); // Añade el nuevo candidato a la lista
-        form.resetForm(); // Resetea los campos del formulario
-        this.candidatolObj = new Candidato(); // Reinicia el objeto candidato
+  constructor(
+    private idiomaService: IdiomaService,
+    private competenciaService: CompetenciaService,
+    private capacitacionService: CapacitacionService
+  ) {}
+
+  ngOnInit(): void {
+    this.getIdiomas();
+    this.getCompetencias();
+    this.getCapacitaciones();
+  }
+
+  // Función para obtener los idiomas de la base de datos
+  getIdiomas(): void {
+    this.idiomaService.getIdioma().subscribe({
+      next: (res: Idiomas[]) => {
+        this.idiomasList = res;
       },
       error: (err) => {
-        console.error('Error al crear el candidato:', err);
+        console.error('Error al obtener idiomas:', err);
       }
     });
   }
 
-ngOnInit(): void {
-  // Inicialización si es necesario
-}
+  // Función para obtener las competencias de la base de datos
+  getCompetencias(): void {
+    this.competenciaService.getCompetencia().subscribe({
+      next: (res: Competencias[]) => {
+        this.competenciasList = res;
+      },
+      error: (err) => {
+        console.error('Error al obtener competencias:', err);
+      }
+    });
+  }
+
+  // Función para obtener las capacitaciones de la base de datos
+  getCapacitaciones(): void {
+    this.capacitacionService.getCapacitaciones().subscribe({
+      next: (res: Capacitaciones[]) => {
+        this.capacitacionesList = res;
+      },
+      error: (err) => {
+        console.error('Error al obtener capacitaciones:', err);
+      }
+    });
+  }
+
+  // Función para crear el candidato
+  onCreateCandidato(form: NgForm): void {
+    // Aquí puedes llamar al servicio que guarda el candidato en la base de datos
+    console.log('Candidato creado:', this.candidatoObj);
+    form.resetForm();
+    this.candidatoObj = new Candidato();
+  }
 }

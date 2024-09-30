@@ -39,6 +39,17 @@ namespace HRBackend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCapacitacion(int id, CandidatoDto candidatoDto)
+        {
+            if (id != candidatoDto.Id)
+            {
+                return BadRequest();
+            }
+
+            await _candidatoService.UpdateCandidatoAsync(candidatoDto);
+            return NoContent();
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
@@ -54,26 +65,16 @@ namespace HRBackend.Controllers
             }
         }
 
-        [HttpPost("registrar")]
-        public async Task<IActionResult> RegistrarCandidato(CandidatoDto candidatoDto)
-        {
-            var resultado = await _candidatoService.RegistrarCandidatoAsync(candidatoDto);
-            if (resultado)
-            {
-                return Ok(new { message = "Registro exitoso" });
-            }
-            return BadRequest(new { message = "Error en el registro" });
-        }
-
         [HttpPost("re")]
         public async Task<IActionResult> RegistrarCandidatoAsync(CandidatoDto candidatoDto)
         {
-            var resultado = await _candidatoService.RegistrarCandidatoAsync(candidatoDto);
-            if (resultado)
+            try
             {
-                return Ok(new { message = "Registro exitoso" });
+                await _candidatoService.AddCandidatoAsync(candidatoDto);
+                return NoContent();
+
             }
-            return BadRequest(new { message = "Error en el registro" });
+            catch(KeyNotFoundException ex) { return BadRequest(ex.Message); }
         }
 
         [HttpDelete("{id}")]

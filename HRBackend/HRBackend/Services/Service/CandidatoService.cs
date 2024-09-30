@@ -11,12 +11,10 @@ namespace HRBackend.Services.Service
     public class CandidatoService : ICandidatoService
     {
         private readonly ICandidatoRepository _candidatoRepository;
-        private readonly IExperienciaLaboralRepository _experienciaRepository;
 
-        public CandidatoService(ICandidatoRepository candidatoRepository, IExperienciaLaboralRepository experienciaRepository)
+        public CandidatoService(ICandidatoRepository candidatoRepository)
         {
             _candidatoRepository = candidatoRepository;
-            _experienciaRepository = experienciaRepository;
         }
         public async Task<CandidatoDto> GetCandidatoByIdAsync(int id)
         {
@@ -25,8 +23,6 @@ namespace HRBackend.Services.Service
             {
                 return null;
             }
-
-            var experiencias = await _experienciaRepository.GetExperienciasByCandidatoIdAsync(candidato.Id);
 
             return new CandidatoDto
             {
@@ -38,17 +34,8 @@ namespace HRBackend.Services.Service
                 SalarioAspira = candidato.SalarioAspira,
                 PrincipalesCompetencias = candidato.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = candidato.PrincipalesCapacitaciones,
-                RecomendadoPor = candidato.RecomendadoPor,
-                // Mapear experiencias
-                ExperienciaLaboralDto = experiencias.Select(e => new ExperienciaLaboralDto
-                {
-                    Id = e.Id,
-                    PuestoOcupado = e.PuestoOcupado,
-                    Empresa = e.Empresa,
-                    FechaDesde = e.FechaDesde.ToUniversalTime(),
-                    FechaHasta = e.FechaHasta.ToUniversalTime(),
-                    Salario = e.Salario
-                }).ToList(),
+                //ExperienciaLaboral = candidato.ExperienciaLaboral,
+                RecomendadoPor = candidato.RecomendadoPor
             };
         }
         public async Task<IEnumerable<CandidatoDto>> GetAllCandidatosAsync()
@@ -70,7 +57,31 @@ namespace HRBackend.Services.Service
             }).OrderBy(x => x.Id);
         }
         //public async Task AddCandidatoAsync(CandidatoDto candidatoDto) { }
-        //public async Task UpdateCandidatoAsync(int id, CandidatoDto candidatoDto){}
+        public async Task UpdateCandidatoAsync(CandidatoDto candidatoDto)
+        {
+            var candidato = await _candidatoRepository.GetByIdAsync(candidatoDto.Id);
+            if (candidato == null)
+            {
+                throw new KeyNotFoundException($"El candidato con ID {candidatoDto.Id} no existe.");
+            }
+            var cedula = _candidatoRepository.ValidaCedula(candidatoDto.Cedula);
+            if (!cedula)
+            {
+                throw new ArgumentException("Cédula inválida.");
+            }
+
+            candidato.Nombre = candidatoDto.Nombre;
+            candidato.Cedula = candidatoDto.Cedula;
+            candidato.PuestoAspira = candidatoDto.PuestoAspira;
+            candidato.Departamento = candidatoDto.Departamento;
+            candidato.SalarioAspira = candidatoDto.SalarioAspira;
+            candidato.PrincipalesCompetencias = candidatoDto.PrincipalesCompetencias;
+            candidato.PrincipalesCapacitaciones = candidatoDto.PrincipalesCapacitaciones;
+            //ExperienciaLaboral = candidatoDto.ExperienciaLaboral,
+            candidato.RecomendadoPor = candidatoDto.RecomendadoPor;
+
+            _candidatoRepository.Update(candidato);
+        }
         public async Task DeleteCandidatoAsync(int id)
         {
             var candidato = await _candidatoRepository.GetByIdAsync(id);
@@ -78,16 +89,19 @@ namespace HRBackend.Services.Service
             {
                 throw new KeyNotFoundException($"El candidato con ID {id} no existe.");
             }
-            var experiencias = await _experienciaRepository.GetExperienciasByCandidatoIdAsync(id);
-            foreach (var experiencia in experiencias)
-            {
-                 _experienciaRepository.Delete(experiencia);
-            }
+
             _candidatoRepository.Delete(candidato);
 
         }
-        public async Task<bool> RegistrarCandidatoAsync(CandidatoDto candidatoDto)
+        public async Task AddCandidatoAsync(CandidatoDto candidatoDto)
         {
+
+            var cedula = _candidatoRepository.ValidaCedula(candidatoDto.Cedula);
+            if (!cedula)
+            {
+                throw new ArgumentException("Cédula inválida.");
+            } 
+
             var candidato = new Candidato
             {
                 Nombre = candidatoDto.Nombre,
@@ -101,21 +115,8 @@ namespace HRBackend.Services.Service
                 RecomendadoPor = candidatoDto.RecomendadoPor
 
             };
+
             await _candidatoRepository.AddAsync(candidato);
-            foreach (var experienciaLaboralDto in candidatoDto.ExperienciaLaboralDto)
-            {
-                var experienciaLaboral = new ExperienciaLaboral
-                {
-                    PuestoOcupado = experienciaLaboralDto.PuestoOcupado,
-                    Empresa = experienciaLaboralDto.Empresa,
-                    FechaDesde = experienciaLaboralDto.FechaDesde,
-                    FechaHasta = experienciaLaboralDto.FechaHasta,
-                    Salario = experienciaLaboralDto.Salario,
-                    Id = candidato.Id // Usar el ID del candidato recién creado
-                };
-                await _experienciaRepository.AddAsync(experienciaLaboral);
-            }
-            return true;
 
         }
     }

@@ -1,132 +1,76 @@
-<div class="form-container">
-    <div class="form-candidato">
-      <h2>Ingresa tus datos</h2>
-      <form #candidatoForm="ngForm" (ngSubmit)="onCreateCandidato(candidatoForm)">
-        <div>
-          <label for="cedula">Cédula:</label>
-          <input
-            type="text"
-            id="cedula"
-            name="cedula"
-            [(ngModel)]="candidatolObj.cedula"
-            required
-            #cedula="ngModel"
-          />
-          <div *ngIf="cedula.invalid && cedula.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <div>
-          <label for="nombre">Nombre:</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            [(ngModel)]="candidatolObj.nombre"
-            required
-            #nombre="ngModel"
-          />
-          <div *ngIf="nombre.invalid && nombre.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <div>
-          <label for="puestoAspira">Puesto Aspirado:</label>
-          <input
-            type="text"
-            id="puestoAspira"
-            name="puestoAspira"
-            [(ngModel)]="candidatolObj.puestoAspira"
-            required
-            #puestoAspira="ngModel"
-          />
-          <div *ngIf="puestoAspira.invalid && puestoAspira.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <div>
-          <label for="departamento">Departamento:</label>
-          <input
-            type="text"
-            id="departamento"
-            name="departamento"
-            [(ngModel)]="candidatolObj.departamento"
-            required
-            #departamento="ngModel"
-          />
-          <div *ngIf="departamento.invalid && departamento.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <div>
-          <label for="salarioAspira">Salario Aspirado:</label>
-          <input
-            type="number"
-            id="salarioAspira"
-            name="salarioAspira"
-            [(ngModel)]="candidatolObj.salarioAspira"
-            min="0"
-            required
-            #salarioAspira="ngModel"
-          />
-          <div *ngIf="salarioAspira.invalid && salarioAspira.touched" class="error">
-            Este campo es obligatorio y debe ser un número mayor a 0
-          </div>
-        </div>
-  
-        <div>
-          <label for="competencias">Principales Competencias:</label>
-          <input
-            type="text"
-            id="competencias"
-            name="competencias"
-            [(ngModel)]="candidatolObj.principalesCompetencias"
-            required
-            #competencias="ngModel"
-          />
-          <div *ngIf="competencias.invalid && competencias.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <div>
-          <label for="capacitaciones">Principales Capacitaciones:</label>
-          <input
-            type="text"
-            id="capacitaciones"
-            name="capacitaciones"
-            [(ngModel)]="candidatolObj.principalesCapacitaciones"
-            required
-            #capacitaciones="ngModel"
-          />
-          <div *ngIf="capacitaciones.invalid && capacitaciones.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <div>
-          <label for="recomendadoPor">Recomendado Por:</label>
-          <input
-            type="text"
-            id="recomendadoPor"
-            name="recomendadoPor"
-            [(ngModel)]="candidatolObj.recomendadoPor"
-            required
-            #recomendadoPor="ngModel"
-          />
-          <div *ngIf="recomendadoPor.invalid && recomendadoPor.touched" class="error">
-            Este campo es obligatorio
-          </div>
-        </div>
-  
-        <button type="submit" [disabled]="candidatoForm.invalid">
-          Crear Candidato
-        </button>
-      </form>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Candidato</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Crear Candidato</h2>
+    <form #form="ngForm" (ngSubmit)="onCreateCandidato(form)">
+
+      <div class="mb-3">
+        <label for="cedula" class="form-label">Cédula</label>
+        <input type="text" [(ngModel)]="candidatoObj.cedula" name="cedula" class="form-control" id="cedula" placeholder="Cédula" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" [(ngModel)]="candidatoObj.nombre" name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="puestoAspira" class="form-label">Puesto al que aspira</label>
+        <input type="text" [(ngModel)]="candidatoObj.puestoAspira" name="puestoAspira" class="form-control" id="puestoAspira" placeholder="Puesto" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="departamento" class="form-label">Departamento</label>
+        <input type="text" [(ngModel)]="candidatoObj.departamento" name="departamento" class="form-control" id="departamento" placeholder="Departamento" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="salarioAspira" class="form-label">Salario que Aspira</label>
+        <input type="number" [(ngModel)]="candidatoObj.salarioAspira" name="salarioAspira" class="form-control" id="salarioAspira" placeholder="Salario" required>
+      </div>
+
+      <!-- Select para Idiomas -->
+      <!-- <div class="mb-3">
+        <label for="idiomas" class="form-label">Idiomas</label>
+        <select [(ngModel)]="candidatoObj.idiomas" name="idiomas" class="form-select" id="idiomas" required>
+          <option *ngFor="let idioma of idiomasList" [value]="idioma">{{ idioma }}</option>
+        </select>
+      </div> -->
+
+      <!-- Select para Competencias -->
+      <div class="mb-3">
+        <label for="principalesCompetencias" class="form-label">Principales Competencias</label>
+        <select [(ngModel)]="candidatoObj.principalesCompetencias" name="principalesCompetencias" class="form-select" id="principalesCompetencias" required>
+          <option *ngFor="let competencia of competenciasList" [value]="competencia">{{ competencia.descripcion }}</option>
+        </select>
+      </div>
+
+      <!-- Select para Capacitaciones -->
+      <div class="mb-3">
+        <label for="principalesCapacitaciones" class="form-label">Principales Capacitaciones</label>
+        <select [(ngModel)]="candidatoObj.principalesCapacitaciones" name="principalesCapacitaciones" class="form-select" id="principalesCapacitaciones" required>
+          <option *ngFor="let capacitacion of capacitacionesList" [value]="capacitacion">{{ capacitacion.descripcion }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="recomendadoPor" class="form-label">Recomendado por</label>
+        <input type="text" [(ngModel)]="candidatoObj.recomendadoPor" name="recomendadoPor" class="form-control" id="recomendadoPor" placeholder="Recomendado por">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Guardar Candidato</button>
+    </form>
   </div>
-  
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
