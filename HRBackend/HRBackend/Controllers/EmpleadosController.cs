@@ -42,25 +42,24 @@ namespace HRBackend.Controllers
             }
         }
 
-        [HttpPost("convertir-candidato-empleado")]
-        public async Task<IActionResult> ConvertirCandidatoEmpleado([FromBody] ConvertirCandidatoRequest request)
+        [HttpPost("convertir")]
+        public async Task<IActionResult> ConvertirCandidatoAEmpleado(int candidatoDto, EmpleadoDto empleadoDto)
         {
-            if (request == null || request.EmpleadoDto == null || request.CandidatoId <= 0)
-                return BadRequest("Datos inválidos");
 
-            // Obtener el candidato de la base de datos
-            var candidato = await _candidatoService.GetCandidatoByIdAsync(request.CandidatoId);
+            if (candidatoDto == null || empleadoDto == null)
+                return BadRequest("Datos del candidato o empleado no proporcionados.");
 
-            if (candidato == null)
-                return NotFound("Candidato no encontrado");
-
-            // Convertir candidato a empleado
-            var empleado = await _empleadoService.ConvertirCandidatoAEmpleado(candidato, request.EmpleadoDto);
-
-            // Guardar el nuevo empleado
-            await _empleadoService.AddEmpleadoNewAsync(empleado);
-
-            return Ok(empleado);
+            // Llamada a la función existente para convertir el candidato a empleado
+            try
+            {
+                await ConvertirCandidatoAEmpleado(candidatoDto, empleadoDto);
+                return Ok(new { Message = "Candidato convertido a empleado exitosamente." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ocurrió un error: {ex.Message}");
+            }
         }
+
     }
 }

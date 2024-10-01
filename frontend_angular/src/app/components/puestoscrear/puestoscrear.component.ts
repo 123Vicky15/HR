@@ -39,20 +39,35 @@ export class PuestosCrearComponent implements OnInit {
   }
 
   salario() { 
-    // Validar que los salarios no sean menores o iguales a 0
-    if (this.puestoObj.nivelMinimoSalario <= 0 || this.puestoObj.nivelMaximoSalario <= 0) {
-      console.error('El salario mínimo y máximo deben ser mayores que cero.');
-      return;
+    let valid = true; // Variable para controlar si los datos son válidos
+  
+    // Validar que el salario mínimo no sea menor a 15000
+    if (this.puestoObj.nivelMinimoSalario < 15000) {
+      alert('El salario mínimo no puede ser menor a 15,000.');
+      valid = false; // Marcar como inválido
     }
   
     // Validar que el salario mínimo no sea mayor que el salario máximo
     if (this.puestoObj.nivelMinimoSalario > this.puestoObj.nivelMaximoSalario) {
-      console.error('El salario mínimo no puede ser mayor que el salario máximo.');
-      return;
+      alert('El salario mínimo no puede ser mayor que el salario máximo.');
+      valid = false; // Marcar como inválido
+    }
+  
+    // Validar que el salario máximo no sea menor que el salario mínimo
+    if (this.puestoObj.nivelMaximoSalario < this.puestoObj.nivelMinimoSalario) {
+      alert('El salario máximo no puede ser menor que el salario mínimo.');
+      valid = false; // Marcar como inválido
+    }
+  
+    // Si los datos no son válidos, no permitir guardar
+    if (!valid) {
+      console.error('Corrige los errores antes de guardar.');
+      return; // Bloquear la acción de guardar
     }
   
     console.log('Los salarios están correctamente ingresados.');
   }
+  
   // Inicialización del componente (si es necesario)
   ngOnInit(): void {
     // Lógica adicional para inicialización si es necesario

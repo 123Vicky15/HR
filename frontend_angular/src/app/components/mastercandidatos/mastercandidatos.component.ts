@@ -4,22 +4,17 @@ import { PuestosComponent } from '../puestos/puestos.component';
 import { EmpleadosComponent } from '../empleados/empleados.component';
 import { CapacitacionesComponent } from '../capacitacioness/capacitaciones.component';
 import { IdiomasComponent } from '../idiomas/idiomas.component';
-import { PuestosCrearComponent } from '../puestoscrear/puestoscrear.component';
 import { CompetenciasComponent } from '../competencias/competencias.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-master',
+  selector: 'app-mastercandidatos',
   standalone: true,
-  imports: [PuestosCrearComponent,CandidatosComponent, PuestosComponent, EmpleadosComponent, CapacitacionesComponent, IdiomasComponent, CompetenciasComponent, CommonModule, RouterModule],
-  templateUrl: './master.component.html',
-  styleUrl: './master.component.css'
+  imports: [CandidatosComponent, PuestosComponent, EmpleadosComponent, CapacitacionesComponent, IdiomasComponent, CompetenciasComponent, CommonModule, RouterModule],
+  templateUrl: './mastercandidatos.component.html',
+  styleUrl: './mastercandidatos.component.css'
 })
-export class MasterComponent {
- currentComponent: string = "Empleados";
+export class MastercandidatosComponent {
 
- changeTap(tabName: string){
-  this.currentComponent = tabName;
- }
 }

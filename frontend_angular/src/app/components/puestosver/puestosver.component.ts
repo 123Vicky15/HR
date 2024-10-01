@@ -42,7 +42,7 @@ export class PuestosverComponent implements OnInit {
   }
   
   goToEditForm(id: number) {
-    this.router.navigate(['/puestoeditar', id])
+    this.router.navigate(['/puestoseditarcomponent', id])
   }
 
   // Método para eliminar una capacitación

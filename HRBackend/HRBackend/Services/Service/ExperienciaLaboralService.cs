@@ -24,7 +24,7 @@ namespace HRBackend.Services.Service
 
             return new ExperienciaLaboralDto
             {
-                Id = experienciaLaboral.Id,
+               // Id = experienciaLaboral.Id,
                 Empresa = experienciaLaboral.Empresa,
                 PuestoOcupado = experienciaLaboral.PuestoOcupado,
                 FechaDesde = experienciaLaboral.FechaDesde,
@@ -39,13 +39,13 @@ namespace HRBackend.Services.Service
 
             return experiencias.Select(e => new ExperienciaLaboralDto
             {
-                Id = e.Id,
+                //Id = e.Id,
                 Empresa = e.Empresa,
                 PuestoOcupado = e.PuestoOcupado,
                 FechaDesde = e.FechaDesde,
                 FechaHasta = e.FechaHasta,
                 Salario = e.Salario
-            }).OrderBy(x => x.Id);
+            });//.OrderBy(x => x.Id);
         }
 
         public async Task AddExperienciaLaboralAsync(ExperienciaLaboralDto experienciaDto)
@@ -62,23 +62,23 @@ namespace HRBackend.Services.Service
             await _experienciaLaboralRepository.AddAsync(experienciaLaboral);
         }
 
-        public async Task UpdateExperienciaLaboralAsync(ExperienciaLaboralDto experienciaDto)
-        {
-            var experienciaLaboral = await _experienciaLaboralRepository.GetByIdAsync(experienciaDto.Id);
-            if (experienciaLaboral == null)
-            {
-                throw new KeyNotFoundException($"La experiencia laboral con ID {experienciaDto.Id} no existe.");
-            }
+        //public async Task UpdateExperienciaLaboralAsync(ExperienciaLaboralDto experienciaDto)
+        //{
+        //    var experienciaLaboral = await _experienciaLaboralRepository.GetByIdAsync(experienciaDto.Id);
+        //    if (experienciaLaboral == null)
+        //    {
+        //        throw new KeyNotFoundException($"La experiencia laboral con ID {experienciaDto.Id} no existe.");
+        //    }
 
-            // Actualizar los campos
-            experienciaLaboral.Empresa = experienciaDto.Empresa;
-            experienciaLaboral.PuestoOcupado = experienciaDto.PuestoOcupado;
-            experienciaLaboral.FechaDesde = experienciaDto.FechaDesde.ToUniversalTime();
-            experienciaLaboral.FechaHasta = experienciaDto.FechaHasta.ToUniversalTime();
-            experienciaLaboral.Salario = experienciaDto.Salario;
+        //    // Actualizar los campos
+        //    experienciaLaboral.Empresa = experienciaDto.Empresa;
+        //    experienciaLaboral.PuestoOcupado = experienciaDto.PuestoOcupado;
+        //    experienciaLaboral.FechaDesde = experienciaDto.FechaDesde.ToUniversalTime();
+        //    experienciaLaboral.FechaHasta = experienciaDto.FechaHasta.ToUniversalTime();
+        //    experienciaLaboral.Salario = experienciaDto.Salario;
 
-            _experienciaLaboralRepository.Update(experienciaLaboral);
-        }
+        //    _experienciaLaboralRepository.Update(experienciaLaboral);
+        //}
 
         public async Task DeleteExperienciaLaboralAsync(int id)
         {

@@ -33,24 +33,24 @@ namespace HRBackend.Controllers
             return Ok(experiencias);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> AddExperienciaLaboral(ExperienciaLaboralDto experienciaDto)
-        {
-            await _experienciaLaboralService.AddExperienciaLaboralAsync(experienciaDto);
-            return CreatedAtAction(nameof(GetExperienciaLaboralById), new { id = experienciaDto.Id }, experienciaDto);
-        }
+        //[HttpPost]
+        //public async Task<ActionResult> AddExperienciaLaboral(ExperienciaLaboralDto experienciaDto)
+        //{
+        //    await _experienciaLaboralService.AddExperienciaLaboralAsync(experienciaDto);
+        //    return CreatedAtAction(nameof(GetExperienciaLaboralById), new { id = experienciaDto.Id }, experienciaDto);
+        //}
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateExperienciaLaboral(int id, ExperienciaLaboralDto experienciaDto)
-        {
-            if (id != experienciaDto.Id)
-            {
-                return BadRequest();
-            }
+       // [HttpPut("{id}")]
+        //public async Task<ActionResult> UpdateExperienciaLaboral(int id, ExperienciaLaboralDto experienciaDto)
+        //{
+        //    if (id != experienciaDto.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            await _experienciaLaboralService.UpdateExperienciaLaboralAsync(experienciaDto);
-            return NoContent();
-        }
+        //    await _experienciaLaboralService.UpdateExperienciaLaboralAsync(experienciaDto);
+        //    return NoContent();
+        //}
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteExperienciaLaboral(int id)

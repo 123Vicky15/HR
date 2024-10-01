@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PuestosService {
-  private apiUrl = 'https://localhost:7021/api/Puestos'; 
+  private apiUrl = 'https://localhost:7021/api/Puesto'; 
   constructor(private http: HttpClient) {}
 
   getPuestos(): Observable<Puestos[]> {

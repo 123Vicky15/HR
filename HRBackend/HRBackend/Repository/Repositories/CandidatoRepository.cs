@@ -93,6 +93,17 @@ namespace HRBackend.Repository.Repositories
 
             return false;
         }
-
+        public async Task<IEnumerable<Candidato>> GetAllWithExperienciaLaboralAsync()
+        {
+            return await _dbSet
+                .Include(c => c.ExperienciaLaboral)  // Include related ExperienciaLaboral
+                .ToListAsync();
+        }
+        public async Task<Candidato> GetByIdWithExperienciaLaboralAsync(int id)
+        {
+            return await _dbSet
+                .Include(c => c.ExperienciaLaboral)
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }

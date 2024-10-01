@@ -16,9 +16,13 @@
             <input type="text" [(ngModel)]="puestoObj.nombre" name="descripcion" class="form-control" id="descripcion" placeholder="Descripción del puesto" required>
         </div>
         <div class="mb-3">
-            <label for="descripcion" class="form-label">Nivel</label>
-            <input type="text" [(ngModel)]="puestoObj.nombre" name="descripcion" class="form-control" id="descripcion" placeholder="Descripción del puesto" required>
-        </div>
+            <label for="nivelRiesgo" class="form-label">Nivel de Riesgo</label>
+            <select [(ngModel)]="puestoObj.nivelRiesgo" name="nivelRiesgo" class="form-control" id="nivelRiesgo" required>
+              <option value="Alto">Alto</option>
+              <option value="Medio">Medio</option>
+              <option value="Bajo">Bajo</option>
+            </select>
+        </div>          
         <div class="mb-3">
             <label for="descripcion" class="form-label">Salario Minimo</label>
             <input type="text" [(ngModel)]="puestoObj.nivelMinimoSalario" name="salariominimo" class="form-control" id="salarioMinimo" placeholder="Salario minimo del puesto" (click)="salario()" required>

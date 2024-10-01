@@ -7,8 +7,9 @@ namespace HRBackend.Services.Interface
         Task<CandidatoDto> GetCandidatoByIdAsync(int id);
         Task<IEnumerable<CandidatoDto>> GetAllCandidatosAsync();
         //Task AddCandidatoAsync(CandidatoDto candidatoDto);
-        Task UpdateCandidatoAsync(CandidatoDto candidatoDto);
+        Task<CandidatoDto> UpdateCandidatoAsync(CandidatoDto candidatoDto);
         Task DeleteCandidatoAsync(int id);
-        Task AddCandidatoAsync(CandidatoDto candidatoDto);
+        //Task AddCandidatoAsync(CandidatoDto candidatoDto);
+        Task<List<CandidatoDto>> AddCandidatowithExAsync(CandidatoCrearEx candidatoDto);
     }
 }

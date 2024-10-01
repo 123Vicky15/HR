@@ -33,6 +33,7 @@ export class PuestoeditarComponent implements OnInit {
   onEstadoChange(value: any) {
     this.puestoObj.estado = value === 'true';  // Asegura que el valor sea booleano
   }
+
   salario() { 
     // Validar que los salarios no sean menores o iguales a 0
     if (this.puestoObj.nivelMinimoSalario <= 0 || this.puestoObj.nivelMaximoSalario <= 0) {
@@ -48,6 +49,7 @@ export class PuestoeditarComponent implements OnInit {
   
     console.log('Los salarios están correctamente ingresados.');
   }
+  
   onUpdatePuesto(form: any): void {
     if (form.valid) {
       this.puestosService.updatePuesto(this.id, this.puestoObj).subscribe(

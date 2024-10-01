@@ -6,7 +6,7 @@
         <div class="card mb-4" [ngClass]="{'border-success': puesto.id === selectedPuestoId}">
           <div class="card-body">
             <h5 class="card-title">{{ puesto.nombre }}</h5>
-            <p class="card-text">{{ puesto.nivelRiegos }}</p>
+            <p class="card-text">{{ puesto.nivelRiesgo }}</p>
             <p class="card-text">{{ puesto.nivelMinimoSalario }}</p>
             <p class="card-text">{{ puesto.nivelMaximoSalario }}</p>
             <button class="btn btn-primary btn-sm" (click)="selectPuesto(puesto.id)">

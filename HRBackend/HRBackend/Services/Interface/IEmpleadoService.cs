@@ -7,7 +7,7 @@ namespace HRBackend.Services.Interface
     {
         Task<EmpleadoDto> GetEmpleadoByIdAsync(int id);
         Task<IEnumerable<EmpleadoDto>> GetAllEmpleadosAsync();
-        Task<Empleado> ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto);
+        Task ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto);
         Task AddEmpleadoAsync(EmpleadoDto empleadoDto);
         Task UpdateEmpleadoAsync(int id, EmpleadoDto empleadoDto);
         Task DeleteEmpleadoAsync(int id);

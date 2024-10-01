@@ -17,13 +17,19 @@ import { PuestoeditarComponent } from './components/puestoeditar/puestoeditar.co
 import { PuestosCrearComponent } from './components/puestoscrear/puestoscrear.component';
 import { PuestosverComponent } from './components/puestosver/puestosver.component';
 import { EmpleadosdetallesComponent } from './components/empleadosdetalles/empleadosdetalles.component';
-
+import { MastercandidatosComponent } from './components/mastercandidatos/mastercandidatos.component';
 
 
 
 
 export const routes: Routes = [
 
+  {
+    path: 'mastercandidatos',
+    component: MastercandidatosComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['HR'] }
+  },
   {
     path: 'experiencia-laboralcrear',
     component: ExperienciaLaboralCrearComponent,

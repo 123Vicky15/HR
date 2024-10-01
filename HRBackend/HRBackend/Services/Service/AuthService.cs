@@ -46,7 +46,7 @@ namespace HRBackend.Services.Service
                 throw new Exception("Empleado no encontrado");
             return new EmpleadoDto
             {
-                Id = empleado.Id,
+                //Id = empleado.Id,
                 Nombre = empleado.Nombre,
                 Cedula = empleado.Cedula,
                 //Correo = empleado.Correo,

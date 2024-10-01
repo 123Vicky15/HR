@@ -1,7 +1,7 @@
 export class Puestos{
 id:number;
 nombre:string;
-nivelRiegos:string;
+nivelRiesgo:string;
 nivelMinimoSalario:number;
 nivelMaximoSalario:number;
 estado:boolean
@@ -9,7 +9,7 @@ estado:boolean
 constructor(){
     this.id = 0;
     this.nombre = '';
-    this.nivelRiegos = '';
+    this.nivelRiesgo = '';
     this.nivelMaximoSalario = 0;
     this.nivelMinimoSalario = 0;
     this.estado = true

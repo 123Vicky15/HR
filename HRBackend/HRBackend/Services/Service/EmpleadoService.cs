@@ -1,6 +1,8 @@
 ﻿using HRBackend.Dtos;
+using HRBackend.Models.Candidatos;
 using HRBackend.Models.Empleado;
 using HRBackend.Repository.Interface;
+using HRBackend.Repository.Repositories;
 using HRBackend.Services.Interface;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,7 @@ namespace HRBackend.Services.Service
             // Convertir la entidad Empleado a DTO
             return new EmpleadoDto
             {
-                Id = empleado.Id,
+                //Id = empleado.Id,
                 Nombre = empleado.Nombre,
                 Cedula = empleado.Cedula,
                 FechaIngreso = empleado.FechaIngreso,
@@ -44,7 +46,7 @@ namespace HRBackend.Services.Service
 
             return empleados.Select(e => new EmpleadoDto
             {
-                Id = e.Id,
+                //Id = e.Id,
                 Nombre = e.Nombre,
                 Cedula = e.Cedula,
                 FechaIngreso = e.FechaIngreso,
@@ -52,26 +54,34 @@ namespace HRBackend.Services.Service
                 Puesto = e.Puesto,
                 SalarioMensual = e.SalarioMensual,
                 Estado = e.Estado
-            }).OrderBy(x => x.Id);
+            });//.OrderBy(x => x.Id);
         }
 
-        public async Task<Empleado> ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto)
+        public async Task ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto)
         {
-            // Crear un nuevo empleado con la información del candidato
             var empleado = new Empleado
             {
-                Cedula = candidatoDto.Cedula,
                 Nombre = candidatoDto.Nombre,
-                Departamento = empleadoDto.Departamento ?? candidatoDto.Departamento,
-                Puesto = empleadoDto.Puesto ?? candidatoDto.PuestoAspira,
-                SalarioMensual = empleadoDto.SalarioMensual,
-                FechaIngreso = DateTime.Now,
-                Estado = empleadoDto.Estado,
-               // Rol = empleadoDto.Rol
-            };
+                Cedula = candidatoDto.Cedula,
+                PrincipalesCompetencias = candidatoDto.PrincipalesCompetencias,
+                PrincipalesCapacitaciones = candidatoDto.PrincipalesCapacitaciones,
+                RecomendadoPor = candidatoDto.RecomendadoPor,
 
-            // Aquí puedes agregar lógica adicional como validaciones o registros
-            return empleado;
+                ExperienciaLaboral = candidatoDto.ExperienciaLaboralDto.Select(e => new ExperienciaLaboral
+                {
+                    Empresa = e.Empresa,
+                    PuestoOcupado = e.PuestoOcupado,
+                    FechaDesde = e.FechaDesde,
+                    FechaHasta = e.FechaHasta,
+                    Salario = e.Salario
+                }).ToList()
+            };
+            empleado.Puesto = empleadoDto.Puesto; 
+            empleado.SalarioMensual = empleadoDto.SalarioMensual; 
+            empleado.Departamento = empleadoDto.Departamento;
+            empleado.FechaIngreso = DateTime.Now;
+
+            await _empleadoRepository.AddAsync(empleado);
         }
         public async Task AddEmpleadoNewAsync(Empleado empleado)
         {
@@ -94,8 +104,6 @@ namespace HRBackend.Services.Service
 
             // Agregar el nuevo empleado a la base de datos
             await _empleadoRepository.AddAsync(empleado);
-
-            // Guardar los cambios
         }
 
         public async Task UpdateEmpleadoAsync(int id, EmpleadoDto empleadoDto)

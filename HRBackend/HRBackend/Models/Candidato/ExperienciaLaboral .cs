@@ -1,4 +1,6 @@
-﻿namespace HRBackend.Models.Candidatos
+﻿using System.Text.Json.Serialization;
+
+namespace HRBackend.Models.Candidatos
 {
     public class ExperienciaLaboral
     {
@@ -9,6 +11,7 @@
         public DateTime FechaHasta { get; set; }
         public decimal Salario { get; set; }
         public int CandidatoId { get; set; }
+        [JsonIgnore]
         public Candidato Candidato { get; set; }
     }
 }
