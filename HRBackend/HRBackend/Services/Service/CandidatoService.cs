@@ -50,6 +50,7 @@ namespace HRBackend.Services.Service
 
             return candidatos.Select(c => new CandidatoDto
             {
+                Id = c.Id,
                 Nombre = c.Nombre,
                 Cedula = c.Cedula,
                 PuestoAspira = c.PuestoAspira,
@@ -162,7 +163,7 @@ namespace HRBackend.Services.Service
         //    await _candidatoRepository.AddAsync(candidato);
 
         //}
-        public async Task<List<CandidatoDto>> AddCandidatowithExAsync(CandidatoCrearEx candidatoDto)
+        public async Task<List<CandidatoDto>> AddCandidatowithExAsync(CandidatoDto candidatoDto)
         {
             // Validación de cédula
             var cedulaValida = _candidatoRepository.ValidaCedula(candidatoDto.Cedula);

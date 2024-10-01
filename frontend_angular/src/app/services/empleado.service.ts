@@ -10,7 +10,7 @@ export class EmpleadoService {
   private apiUrl = 'https://localhost:7021/api/Empleados';  
 
   constructor(private http: HttpClient) {}
-  
+
   getEmpleados(): Observable<any> {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
@@ -19,6 +19,6 @@ export class EmpleadoService {
       candidatoId: candidatoId,
       empleadoDto: empleadoData
     };
-    return this.http.post(`${this.apiUrl}/convertir-candidato-empleado`, body);
+    return this.http.post(`${this.apiUrl}/convertir`, body);
   }
 }

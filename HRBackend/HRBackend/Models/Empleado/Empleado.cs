@@ -4,7 +4,7 @@ namespace HRBackend.Models.Empleado
 {
     public class Empleado //: Usuario
     {
-        public int Id { get; set; }
+        public int  Id { get; set; }
         public string Cedula { get; set; }
         public string Clave { get; set; }
         public string Nombre { get; set; }
@@ -13,10 +13,5 @@ namespace HRBackend.Models.Empleado
         public string Puesto { get; set; }
         public decimal SalarioMensual { get; set; }
         public bool Estado { get; set; } // Activo, Inactivo, etc.
-        public string PrincipalesCompetencias { get; set; }
-        public string PrincipalesCapacitaciones { get; set; }
-        public List<ExperienciaLaboral> ExperienciaLaboral { get; set; }
-        public string RecomendadoPor { get; set; }
-        //public string Rol { get; set; }
     }
 }

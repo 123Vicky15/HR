@@ -77,15 +77,10 @@ namespace HRBackend.Controllers
         //    catch(KeyNotFoundException ex) { return BadRequest(ex.Message); }
         //}
         [HttpPost]
-        public async Task<IActionResult> AddCandidatoExAsync(CandidatoCrearEx candidatoDto)
+        public async Task<IActionResult> AddCandidatoExAsync(CandidatoDto candidatoDto)
         {
-            try
-            {
-                await _candidatoService.AddCandidatowithExAsync(candidatoDto);
-                return NoContent();
-
-            }
-            catch (KeyNotFoundException ex) { return BadRequest(ex.Message); }
+            await _candidatoService.AddCandidatowithExAsync(candidatoDto);
+            return CreatedAtAction(nameof(GetCandidatoById), new { id = candidatoDto.Id}, candidatoDto);
         }
 
         [HttpDelete("{id}")]

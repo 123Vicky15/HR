@@ -43,23 +43,24 @@ namespace HRBackend.Controllers
         }
 
         [HttpPost("convertir")]
-        public async Task<IActionResult> ConvertirCandidatoAEmpleado(int candidatoDto, EmpleadoDto empleadoDto)
+        public async Task<IActionResult> ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto)
         {
-
             if (candidatoDto == null || empleadoDto == null)
-                return BadRequest("Datos del candidato o empleado no proporcionados.");
+            {
+                return BadRequest("Datos incompletos.");
+            }
 
-            // Llamada a la función existente para convertir el candidato a empleado
             try
             {
                 await ConvertirCandidatoAEmpleado(candidatoDto, empleadoDto);
-                return Ok(new { Message = "Candidato convertido a empleado exitosamente." });
+                return Ok("Candidato convertido a empleado exitosamente.");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Ocurrió un error: {ex.Message}");
+                return StatusCode(500, $"Error al convertir candidato a empleado: {ex.Message}");
             }
         }
+
 
     }
 }

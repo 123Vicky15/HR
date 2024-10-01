@@ -63,18 +63,6 @@ namespace HRBackend.Services.Service
             {
                 Nombre = candidatoDto.Nombre,
                 Cedula = candidatoDto.Cedula,
-                PrincipalesCompetencias = candidatoDto.PrincipalesCompetencias,
-                PrincipalesCapacitaciones = candidatoDto.PrincipalesCapacitaciones,
-                RecomendadoPor = candidatoDto.RecomendadoPor,
-
-                ExperienciaLaboral = candidatoDto.ExperienciaLaboralDto.Select(e => new ExperienciaLaboral
-                {
-                    Empresa = e.Empresa,
-                    PuestoOcupado = e.PuestoOcupado,
-                    FechaDesde = e.FechaDesde,
-                    FechaHasta = e.FechaHasta,
-                    Salario = e.Salario
-                }).ToList()
             };
             empleado.Puesto = empleadoDto.Puesto; 
             empleado.SalarioMensual = empleadoDto.SalarioMensual; 

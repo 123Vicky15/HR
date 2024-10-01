@@ -10,6 +10,6 @@ namespace HRBackend.Services.Interface
         Task<CandidatoDto> UpdateCandidatoAsync(CandidatoDto candidatoDto);
         Task DeleteCandidatoAsync(int id);
         //Task AddCandidatoAsync(CandidatoDto candidatoDto);
-        Task<List<CandidatoDto>> AddCandidatowithExAsync(CandidatoCrearEx candidatoDto);
+        Task<List<CandidatoDto>> AddCandidatowithExAsync(CandidatoDto candidatoDto);
     }
 }

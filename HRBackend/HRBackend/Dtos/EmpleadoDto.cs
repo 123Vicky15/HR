@@ -13,11 +13,6 @@ namespace HRBackend.Dtos
         public string Puesto { get; set; }
         public decimal SalarioMensual { get; set; }
         public bool Estado { get; set; }
-        public string PrincipalesCompetencias { get; set; }
-        public string PrincipalesCapacitaciones { get; set; }
-        public List<ExperienciaLaboral> ExperienciaLaboral { get; set; }
-        public string RecomendadoPor { get; set; }
-        //public string Rol { get; set; }
 
     }
 }
