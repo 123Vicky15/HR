@@ -6,7 +6,6 @@ namespace HRBackend.Dtos
     {
         //public int Id { get; set; }
         public string Cedula { get; set; }
-        public string Clave { get; set; }
         public string Nombre { get; set; }
         public DateTime FechaIngreso { get; set; }
         public string Departamento { get; set; }

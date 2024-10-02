@@ -3,6 +3,7 @@ using HRBackend.Models;
 using HRBackend.Models.Candidatos;
 using HRBackend.Repository.Interface;
 using HRBackend.Services.Interface;
+using Microsoft.AspNetCore.Identity;
 
 namespace HRBackend.Services.Service
 {
@@ -16,6 +17,7 @@ namespace HRBackend.Services.Service
             _candidatoRepository = candidatoRepository;
             _empleadoRepository = empleadoRepository;
         }
+
 
         public async Task<CandidatoDto> RegisterCandidato(CandidatoDto candidatoDto)
         {
@@ -38,27 +40,27 @@ namespace HRBackend.Services.Service
             return candidatoDto;
 
         }
-        public async Task<EmpleadoDto> LoginEmpleado(LoginDto loginDto)
-        {
-            var empleado = await _empleadoRepository.GetEmpleadoByClaveAndNombreAsync(loginDto.Nombre, _empleadoRepository.EncriptarClave(loginDto.Clave));
+        //public async Task<EmpleadoDto> LoginEmpleado(LoginDto loginDto)
+        //{
+        //    var empleado = await _empleadoRepository.GetEmpleadoByClaveAndNombreAsync(loginDto.Nombre, _empleadoRepository.EncriptarClave(loginDto.Clave));
             
-            if (empleado == null)
-                throw new Exception("Empleado no encontrado");
-            return new EmpleadoDto
-            {
-                //Id = empleado.Id,
-                Nombre = empleado.Nombre,
-                Cedula = empleado.Cedula,
-                //Correo = empleado.Correo,
-                //Clave = empleado.Clave,
-                FechaIngreso = empleado.FechaIngreso,
-                Departamento = empleado.Departamento,
-                Puesto = empleado.Puesto,
-                SalarioMensual = empleado.SalarioMensual,
-                Estado = empleado.Estado,
-                //Rol = empleado.Rol
-            };
-         }
+        //    if (empleado == null)
+        //        throw new Exception("Empleado no encontrado");
+        //    return new EmpleadoDto
+        //    {
+        //        //Id = empleado.Id,
+        //        Nombre = empleado.Nombre,
+        //        Cedula = empleado.Cedula,
+        //        //Correo = empleado.Correo,
+        //        //Clave = empleado.Clave,
+        //        FechaIngreso = empleado.FechaIngreso,
+        //        Departamento = empleado.Departamento,
+        //        Puesto = empleado.Puesto,
+        //        SalarioMensual = empleado.SalarioMensual,
+        //        Estado = empleado.Estado,
+        //        //Rol = empleado.Rol
+        //    };
+        // }
 
         public async Task<CandidatoDto> LoginCandidato(LoginDto loginDto)
         {

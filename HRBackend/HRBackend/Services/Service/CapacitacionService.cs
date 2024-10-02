@@ -17,6 +17,10 @@ namespace HRBackend.Services.Service
         // Agregar una nueva capacitación
         public async Task AddCapacitacionAsync(CapacitacionDto capacitacionDto)
         {
+            if (capacitacionDto.FechaDesde > capacitacionDto.FechaHasta)
+            {
+                throw new ArgumentException("La fecha de inicio no puede ser mayor que la fecha de fin.");
+            }
             var capacitacion = new Capacitacion
             {
                 Descripcion = capacitacionDto.Descripcion,
@@ -88,6 +92,10 @@ namespace HRBackend.Services.Service
             if (capacitacion == null)
             {
                 throw new KeyNotFoundException($"La capacitación con ID {capacitacionDto.Id} no existe.");
+            }
+            if (capacitacionDto.FechaDesde > capacitacionDto.FechaHasta)
+            {
+                throw new ArgumentException("La fecha de inicio no puede ser mayor que la fecha de fin.");
             }
 
             // Actualizar los campos de la entidad

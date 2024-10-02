@@ -171,6 +171,17 @@ namespace HRBackend.Services.Service
             {
                 throw new ArgumentException("Cédula inválida.");
             }
+            if (candidatoDto.SalarioAspira <= 0)
+            {
+                throw new ArgumentException("Los salarios no pueden ser negativos.");
+            }
+            foreach (var experiencia in candidatoDto.ExperienciaLaboralDto)
+            {
+                if (experiencia.FechaHasta < experiencia.FechaDesde)
+                {
+                    throw new ArgumentException($"La fecha de fin para la experiencia en '{experiencia.Empresa}' no puede ser anterior a la fecha de inicio.");
+                }
+            }
 
             // Creación de la entidad Candidato
             var candidato = new Candidato

@@ -1,6 +1,5 @@
 ﻿namespace HRBackend.Context;
 
-using HRBackend.Models;
 using HRBackend.Models.Candidatos;
 using HRBackend.Models.Empleado;
 using Microsoft.EntityFrameworkCore;

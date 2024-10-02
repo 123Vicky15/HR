@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using HRBackend.Models.Empleado;
+using Microsoft.Extensions.Hosting;
 
 namespace HRBackend.Models.Candidatos
 {
@@ -13,7 +14,8 @@ namespace HRBackend.Models.Candidatos
         public string PrincipalesCompetencias { get; set; } // Organizaciones, Técnicas-Operativas, etc.
         public string PrincipalesCapacitaciones { get; set; } // Post-grado, Grado, Técnicas, etc.
         public List<ExperienciaLaboral> ExperienciaLaboral { get; set; } = new List<ExperienciaLaboral>();
-        //public ICollection<ExperienciaLaboral> ExperienciaLaboral { get; } = new List<Post>();
         public string RecomendadoPor { get; set; }
+        public int UsuarioId { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

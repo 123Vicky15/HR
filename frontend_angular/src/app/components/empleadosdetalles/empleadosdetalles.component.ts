@@ -6,7 +6,7 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { Empleado } from '../../models/class/Empleado';
 import { EmpleadoService } from '../../services/empleado.service';
 import { CandidatoService } from '../../services/candidato.service';
-
+import { PuestosService } from '../../services/puestos.service';
 import { NgForm } from '@angular/forms';
 
 
@@ -26,6 +26,7 @@ export class EmpleadosdetallesComponent implements OnInit {
     private route: ActivatedRoute,
     private empleadoService: EmpleadoService,
     private candidatoService: CandidatoService,
+    private puestosService: PuestosService,
     private router: Router
   ) {}
 
@@ -50,6 +51,7 @@ export class EmpleadosdetallesComponent implements OnInit {
     // Solo copiar los datos que comparten entre candidato y empleado
     this.empleadoDto.nombre = this.candidato.nombre;
     this.empleadoDto.cedula = this.candidato.cedula;
+    //this.empleadoDto.puesto = this.puestosService.
     // Los demás campos quedan vacíos para ser llenados manualmente
   }
 

@@ -51,19 +51,19 @@ namespace HRBackend.Controllers
             return NoContent();
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
-        {
-            try
-            {
-                var candidato = await _authService.LoginEmpleado(loginDto);
-                return Ok(candidato);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpPost("login")]
+        //public async Task<IActionResult> Login(LoginDto loginDto)
+        //{
+        //    try
+        //    {
+        //        var candidato = await _authService.LoginEmpleado(loginDto);
+        //        return Ok(candidato);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         //[HttpPost("re")]
         //public async Task<IActionResult> RegistrarCandidatoAsync(CandidatoDto candidatoDto)
@@ -80,6 +80,7 @@ namespace HRBackend.Controllers
         public async Task<IActionResult> AddCandidatoExAsync(CandidatoDto candidatoDto)
         {
             await _candidatoService.AddCandidatowithExAsync(candidatoDto);
+
             return CreatedAtAction(nameof(GetCandidatoById), new { id = candidatoDto.Id}, candidatoDto);
         }
 

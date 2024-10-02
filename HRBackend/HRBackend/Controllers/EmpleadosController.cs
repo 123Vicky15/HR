@@ -28,31 +28,31 @@ namespace HRBackend.Controllers
             return Ok(empleados);
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
-        {
-            try
-            {
-                var empleado = await _authService.LoginEmpleado(loginDto);
-                return Ok(empleado);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpPost("login")]
+        //public async Task<IActionResult> Login(LoginDto loginDto)
+        //{
+        //    try
+        //    {
+        //        var empleado = await _authService.LoginEmpleado(loginDto);
+        //        return Ok(empleado);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [HttpPost("convertir")]
-        public async Task<IActionResult> ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto)
+        public async Task<IActionResult> ConvertirCandidatoAlEmpleado([FromBody] ConvertirCandidatoRequest request)
         {
-            if (candidatoDto == null || empleadoDto == null)
+            if (request.CandidatoId == 0 || request.PuestoId == 0)
             {
                 return BadRequest("Datos incompletos.");
             }
 
             try
             {
-                await ConvertirCandidatoAEmpleado(candidatoDto, empleadoDto);
+                await _empleadoService.ConvertirCandidatoAEmpleado(request);
                 return Ok("Candidato convertido a empleado exitosamente.");
             }
             catch (Exception ex)

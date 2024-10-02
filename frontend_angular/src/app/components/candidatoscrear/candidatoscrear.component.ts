@@ -8,9 +8,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdiomaService } from '../../services/idioma.service';  // Servicio para obtener los idiomas
 import { CompetenciaService } from '../../services/competencia.service'; // Servicio para competencias
 import { CapacitacionService } from '../../services/capacitacion.service';
+import { ExperienciaLaboralService } from '../../services/experiencia-laboral.service';  // Servicio para obtener los idiomas
 import { Idiomas } from '../../models/class/Idiomas';
 import { Competencias } from '../../models/class/Competencias';
 import { Capacitaciones } from '../../models/class/Capacitaciones';
+import { ExperienciaLaboral } from '../../models/class/ExperienciaLaboral';
+
 @Component({
   selector: 'app-candidatoscrear',
   standalone: true,
@@ -24,17 +27,21 @@ export class CandidatoscrearComponent implements OnInit {
   idiomasList: Idiomas[] = [];              // Lista de idiomas
   competenciasList: Competencias[] = [];         // Lista de competencias
   capacitacionesList: Capacitaciones[] = [];       // Lista de capacitaciones
+  experienciaLaboralList: ExperienciaLaboral[] = [];       // Lista de Experiencia
+
 
   constructor(
     private idiomaService: IdiomaService,
     private competenciaService: CompetenciaService,
-    private capacitacionService: CapacitacionService
+    private capacitacionService: CapacitacionService,
+    private experienciaLaboralService: ExperienciaLaboralService
   ) {}
 
   ngOnInit(): void {
     this.getIdiomas();
     this.getCompetencias();
     this.getCapacitaciones();
+    this.getExperienciaLaboral();
   }
 
   // Función para obtener los idiomas de la base de datos
@@ -48,7 +55,16 @@ export class CandidatoscrearComponent implements OnInit {
       }
     });
   }
-
+  getExperienciaLaboral(): void {
+    this.experienciaLaboralService.getExperienciaLaboral().subscribe({
+      next: (res: ExperienciaLaboral[]) => {
+        this.experienciaLaboralList = res;
+      },
+      error: (err) => {
+        console.error('Error al obtener experiencia laboral:', err);
+      }
+    });
+  }
   // Función para obtener las competencias de la base de datos
   getCompetencias(): void {
     this.competenciaService.getCompetencia().subscribe({

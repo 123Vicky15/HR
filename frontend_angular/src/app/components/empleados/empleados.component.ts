@@ -53,32 +53,33 @@ export class EmpleadosComponent implements OnInit {
 
   generarReporte() {
     const doc = new jsPDF();
-
+  
     // Agregar título
     doc.setFontSize(18);
     doc.text('Reporte de Empleados', 10, 10);
-
+  
     // Agregar subtítulo
     doc.setFontSize(12);
     doc.text(`Desde: ${this.fechaDesde} Hasta: ${this.fechaHasta}`, 10, 20);
-
+  
     // Configurar tabla
     let y = 30;
     doc.setFontSize(10);
     doc.text('Nombre', 10, y);
-    doc.text('Correo', 80, y);
+    doc.text('Salario Mensual', 80, y);  // Cambié 'Correo' a 'Salario Mensual'
     doc.text('Fecha de Ingreso', 150, y);
-
+  
     // Rellenar la tabla con los empleados filtrados
     y += 10;
     this.empleadosFiltrados.forEach(empleado => {
       doc.text(empleado.nombre, 10, y);
-      doc.text(empleado.correo, 80, y);
+      doc.text(empleado.salarioMensual.toString(), 80, y);  // Convertir salario a cadena
       doc.text(new Date(empleado.fechaIngreso).toLocaleDateString(), 150, y);
       y += 10;
     });
-
+  
     // Descargar el PDF
     doc.save('reporte-empleados.pdf');
   }
+  
 }

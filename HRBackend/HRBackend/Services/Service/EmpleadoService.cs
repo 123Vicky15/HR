@@ -13,9 +13,13 @@ namespace HRBackend.Services.Service
     public class EmpleadoService : IEmpleadoService
     {
         private readonly IEmpleadoRepository _empleadoRepository;
-        public EmpleadoService(IEmpleadoRepository empleadoRepository)
+        private readonly IPuestoRepository _puestoRepository;
+        private readonly ICandidatoRepository _candidatoRepository; 
+        public EmpleadoService(IEmpleadoRepository empleadoRepository, IPuestoRepository puestoRepository, ICandidatoRepository candidatoRepository)
         {
             _empleadoRepository = empleadoRepository;
+            _puestoRepository = puestoRepository;
+            _candidatoRepository = candidatoRepository;
         }
 
         public async Task<EmpleadoDto> GetEmpleadoByIdAsync(int id)
@@ -54,68 +58,84 @@ namespace HRBackend.Services.Service
                 Puesto = e.Puesto,
                 SalarioMensual = e.SalarioMensual,
                 Estado = e.Estado
-            });//.OrderBy(x => x.Id);
+            });
         }
 
-        public async Task ConvertirCandidatoAEmpleado(CandidatoDto candidatoDto, EmpleadoDto empleadoDto)
+        public async Task ConvertirCandidatoAEmpleado(ConvertirCandidatoRequest request)
         {
-            var empleado = new Empleado
+            var candidato = await _candidatoRepository.GetByIdAsync(request.CandidatoId);
+            var puesto = await _puestoRepository.GetByIdAsync(request.PuestoId);
+
+            if (request.SalarioMensual <= 0)
             {
-                Nombre = candidatoDto.Nombre,
-                Cedula = candidatoDto.Cedula,
-            };
-            empleado.Puesto = empleadoDto.Puesto; 
-            empleado.SalarioMensual = empleadoDto.SalarioMensual; 
-            empleado.Departamento = empleadoDto.Departamento;
-            empleado.FechaIngreso = DateTime.Now;
-
-            await _empleadoRepository.AddAsync(empleado);
-        }
-        public async Task AddEmpleadoNewAsync(Empleado empleado)
-        {
-            await _empleadoRepository.AddAsync(empleado);
-        }
-        public async Task AddEmpleadoAsync(EmpleadoDto empleadoDto)
-        {
-            // Mapear el EmpleadoDto a la entidad Empleado
-            var empleado = new Empleado
-            {
-                Cedula = empleadoDto.Cedula,
-                Nombre = empleadoDto.Nombre,
-                FechaIngreso = empleadoDto.FechaIngreso,
-                Departamento = empleadoDto.Departamento,
-                Puesto = empleadoDto.Puesto,
-                SalarioMensual = empleadoDto.SalarioMensual,
-                Estado = empleadoDto.Estado,
-               // Rol = empleadoDto.Rol
-            };
-
-            // Agregar el nuevo empleado a la base de datos
-            await _empleadoRepository.AddAsync(empleado);
-        }
-
-        public async Task UpdateEmpleadoAsync(int id, EmpleadoDto empleadoDto)
-        {
-            // Buscar el empleado por ID en la base de datos
-            var empleado = await _empleadoRepository.GetByIdAsync(id);
-
-            if (empleado == null)
-            {
-                throw new KeyNotFoundException($"Empleado con ID {id} no encontrado");
+                throw new ArgumentException("El salario aspirado no puede ser menor o igual a 0.");
             }
+            var empleado = new Empleado
+            {
+                Nombre = candidato.Nombre,
+                Cedula = candidato.Cedula,
+                Puesto = puesto.Nombre,
+                SalarioMensual = request.SalarioMensual,
+                Departamento = request.Departamento,
+                FechaIngreso = request.FechaIngreso,
+                Estado = request.Estado
+            };
+            try
+            {
 
-            // Actualizar los campos del empleado
-            empleado.Cedula = empleadoDto.Cedula;
-            empleado.Nombre = empleadoDto.Nombre;
-            empleado.FechaIngreso = empleadoDto.FechaIngreso;
-            empleado.Departamento = empleadoDto.Departamento;
-            empleado.Puesto = empleadoDto.Puesto;
-            empleado.SalarioMensual = empleadoDto.SalarioMensual;
-            empleado.Estado = empleadoDto.Estado;
-            //empleado.Rol = empleadoDto.Rol;
+            await _empleadoRepository.AddAsync(empleado);
+            }
+            catch (Exception ex)
+            {
 
-            _empleadoRepository.Update(empleado);
+                throw;
+            }
         }
+        //public async Task AddEmpleadoNewAsync(Empleado empleado)
+        //{
+        //    await _empleadoRepository.AddAsync(empleado);
+        //}
+        //public async Task AddEmpleadoAsync(EmpleadoDto empleadoDto)
+        //{
+        //    // Mapear el EmpleadoDto a la entidad Empleado
+        //    var empleado = new Empleado
+        //    {
+        //        Cedula = empleadoDto.Cedula,
+        //        Nombre = empleadoDto.Nombre,
+        //        FechaIngreso = empleadoDto.FechaIngreso,
+        //        Departamento = empleadoDto.Departamento,
+        //        Puesto = empleadoDto.Puesto,
+        //        SalarioMensual = empleadoDto.SalarioMensual,
+        //        Estado = empleadoDto.Estado,
+        //       // Rol = empleadoDto.Rol
+        //    };
+
+        //    // Agregar el nuevo empleado a la base de datos
+        //    await _empleadoRepository.AddAsync(empleado);
+        //}
+
+        //public async Task UpdateEmpleadoAsync(int id, EmpleadoDto empleadoDto)
+        //{
+        //    // Buscar el empleado por ID en la base de datos
+        //    var empleado = await _empleadoRepository.GetByIdAsync(id);
+
+        //    if (empleado == null)
+        //    {
+        //        throw new KeyNotFoundException($"Empleado con ID {id} no encontrado");
+        //    }
+
+        //    // Actualizar los campos del empleado
+        //    empleado.Cedula = empleadoDto.Cedula;
+        //    empleado.Nombre = empleadoDto.Nombre;
+        //    empleado.FechaIngreso = empleadoDto.FechaIngreso;
+        //    empleado.Departamento = empleadoDto.Departamento;
+        //    empleado.Puesto = empleadoDto.Puesto;
+        //    empleado.SalarioMensual = empleadoDto.SalarioMensual;
+        //    empleado.Estado = empleadoDto.Estado;
+        //    //empleado.Rol = empleadoDto.Rol;
+
+        //    _empleadoRepository.Update(empleado);
+        //}
 
         public async Task DeleteEmpleadoAsync(int id)
         {

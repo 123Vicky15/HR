@@ -1,3 +1,4 @@
+import { ExperienciaLaboral } from "./ExperienciaLaboral";
 export class Candidato {
     id: number;
     cedula: string;
@@ -9,7 +10,7 @@ export class Candidato {
     salarioAspira: number; 
     principalesCompetencias: string; 
     principalesCapacitaciones: string; 
-    //experienciaLaboral: ExperienciaLaboral[]; 
+    experienciaLaboral: ExperienciaLaboral[]; 
     recomendadoPor: string;
 
     constructor() {
@@ -23,7 +24,7 @@ export class Candidato {
         this.salarioAspira = 0;
         this.principalesCompetencias = '';
         this.principalesCapacitaciones = '';
-        //this.experienciaLaboral = experienciaLaboral; // Si no se pasa como parámetro, será un array vacío
+        this.experienciaLaboral = []; 
         this.recomendadoPor = '';
     }
 }

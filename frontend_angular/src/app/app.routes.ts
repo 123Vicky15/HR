@@ -19,34 +19,42 @@ import { PuestosverComponent } from './components/puestosver/puestosver.componen
 import { EmpleadosdetallesComponent } from './components/empleadosdetalles/empleadosdetalles.component';
 import { MastercandidatosComponent } from './components/mastercandidatos/mastercandidatos.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { MasterComponent } from './components/master/master.component';
 
 
 
 
 export const routes: Routes = [
   {
-    path: '#pills-register',
-    component: RegistrationComponent,
+    path: 'master',
+    component: MasterComponent,
  //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
   },
   {
-    path: 'registration',
+    path: 'register',
     component: RegistrationComponent,
  //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+ //   canActivate: [AuthGuard],
+  //  data: { roles: ['User'] }
   },
   {
     path: 'mastercandidatos',
     component: MastercandidatosComponent,
  //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
   },
   {
     path: 'experiencia-laboralcrear',
     component: ExperienciaLaboralCrearComponent,
  //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
   },
 
   // Rutas accesibles solo por empleados de HR
@@ -71,14 +79,20 @@ export const routes: Routes = [
   { 
     path: 'idiomaseditar/:id', 
     component: IdiomaseditarComponent, 
+      //  data: { roles: ['HR'] }
+
   },
   { 
     path: 'puestoseditarcomponent/:id', 
     component: PuestoeditarComponent, 
+      //  data: { roles: ['HR'] }
+
   },
   { 
     path: 'competenciasformeditar/:id', 
     component: CompetenciasformeditarComponent,
+      //  data: { roles: ['HR'] }
+
   },
   {
     path: 'competenciasformcrear',
@@ -96,7 +110,7 @@ export const routes: Routes = [
     path: 'capacitacionesformcrear',
     component: CapacitacionesformcrearComponent,
  //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
   },
   {
     path: 'capacitacionesform/:id',
@@ -108,7 +122,7 @@ export const routes: Routes = [
     path: 'candidatoscrear',
     component: CandidatoscrearComponent,
  //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
   },
   {
     path: 'candidatos/:id',
@@ -150,7 +164,7 @@ export const routes: Routes = [
     path: 'capacitaciones',
     component: CapacitacionesComponent,
   //  canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
+  //  data: { roles: ['User'] }
   },
   {
     path: 'puestos',
