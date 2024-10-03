@@ -77,7 +77,7 @@ namespace HRBackend.Services.Service
                 Puesto = puesto.Nombre,
                 SalarioMensual = request.SalarioMensual,
                 Departamento = request.Departamento,
-                FechaIngreso = request.FechaIngreso,
+                FechaIngreso = request.FechaIngreso.ToUniversalTime(),
                 Estado = request.Estado
             };
             try

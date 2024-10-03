@@ -75,7 +75,14 @@ export class EmpleadosdetallesComponent implements OnInit {
 
   convertirAEmpleado() {
     if (this.validarFormulario()) {
-      this.empleadoService.convertirCandidatoAEmpleado(this.puestoId,this.candidatoId, this.empleadoDto).subscribe({
+      const convertirCandidatoRequest = {
+        SalarioMensual: this.empleadoDto.salarioMensual,
+        Departamento: this.empleadoDto.departamento,
+        FechaIngreso: this.empleadoDto.fechaIngreso,
+        Estado: this.empleadoDto.estado
+      };
+
+      this.empleadoService.convertirCandidatoAEmpleado(this.candidatoId, this.puestoId, convertirCandidatoRequest).subscribe({
         next: (response) => {
           alert('Candidato convertido en empleado con éxito');
           this.router.navigate(['/empleados']); // Redirigir a la lista de empleados
@@ -86,7 +93,12 @@ export class EmpleadosdetallesComponent implements OnInit {
   }
 
   validarFormulario(): boolean {
-    return this.empleadoDto.departamento && this.empleadoDto.puesto && this.empleadoDto.salarioMensual && this.empleadoDto.estado && this.empleadoDto.fechaIngreso;
+    return (
+      this.empleadoDto.departamento &&
+      this.empleadoDto.salarioMensual > 0 && 
+      this.empleadoDto.fechaIngreso &&
+      this.empleadoDto.estado !== undefined 
+    );
   }
 
   eliminarCandidato() {
