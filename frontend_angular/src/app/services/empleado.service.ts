@@ -14,10 +14,11 @@ export class EmpleadoService {
   getEmpleados(): Observable<any> {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
-  convertirCandidatoAEmpleado(candidatoId: number, empleadoData: any): Observable<any> {
+  convertirCandidatoAEmpleado(candidatoId: number, puestoId: number, empleadoData: any): Observable<any> {
     const body = {
-      candidatoId: candidatoId,
-      empleadoDto: empleadoData
+      ...empleadoData,
+      candidatoId,
+      puestoId
     };
     return this.http.post(`${this.apiUrl}/convertir`, body);
   }

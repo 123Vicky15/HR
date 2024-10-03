@@ -10,8 +10,8 @@ namespace HRBackend.Models.Candidatos
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHasta { get; set; }
         public decimal Salario { get; set; }
-        public int CandidatoId { get; set; }
+        public int? CandidatoId { get; set; }
         [JsonIgnore]
-        public Candidato Candidato { get; set; }
+        public Candidato? Candidato { get; set; }
     }
 }

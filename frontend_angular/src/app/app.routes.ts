@@ -27,8 +27,16 @@ import { MasterComponent } from './components/master/master.component';
 
 export const routes: Routes = [
   {
-    path: 'master',
+    path: '',
     component: MasterComponent,
+    children: [
+      {
+        path: 'candidatoscrear',
+        component: CandidatoscrearComponent,
+     //   canActivate: [AuthGuard],
+      //  data: { roles: ['User'] }
+      },
+    ]
  //   canActivate: [AuthGuard],
   //  data: { roles: ['User'] }
   },
@@ -117,12 +125,6 @@ export const routes: Routes = [
     component: CapacitacionesformComponent,
  //   canActivate: [AuthGuard],
   //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'candidatoscrear',
-    component: CandidatoscrearComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
   },
   {
     path: 'candidatos/:id',

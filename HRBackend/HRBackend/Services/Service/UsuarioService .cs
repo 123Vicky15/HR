@@ -9,44 +9,57 @@ namespace HRBackend.Services.Service
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ICandidatoRepository _candidatoRepository;
+        private readonly IEmpleadoRepository _empleadoRepository;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository)
+
+        public UsuarioService(IUsuarioRepository usuarioRepository, ICandidatoRepository candidatoRepository, IEmpleadoRepository empleadoRepository)
         {
             _usuarioRepository = usuarioRepository;
+            _candidatoRepository = candidatoRepository;
+            _empleadoRepository = empleadoRepository;
         }
 
         public async Task<UsuarioDto> Login(UsuarioDto usuarioDto)
         {
-            var usuario = await _usuarioRepository.GetUsuarioByNombre(usuarioDto.UserName);
-            if (usuario == null || usuario.Password != usuarioDto.Password)
-                return null;
-
-            // Mapea los datos del Usuario a UsuarioDto antes de retornarlo
-            var usuarionew = new Usuario
+            var usuario = await _usuarioRepository.GetUsuario(usuarioDto.UserName);
+            //if (usuario == null || usuario.Password != usuarioDto.Password)
+            //    return null;
+            if (usuario.Rol == "Empleado")
             {
-                UserName = usuarioDto.UserName,
-                Password = usuarioDto.Password,
-            };
+                return usuarioDto;
+            }
+            else {
+                usuarioDto.Rol = "Candidato";
+            }
+
             return usuarioDto;
         }
 
 
         public async Task<UsuarioDto> Register(UsuarioDto usuarioDto)
         {
-            // Crea una entidad Usuario a partir del UsuarioDto
+            // Verifica si el nombre de usuario ya existe
+            var existingUser = await _usuarioRepository.GetUsuarioByNombre(usuarioDto.UserName);
+            if (existingUser != null)
+            {
+                throw new Exception("El nombre de usuario ya está en uso.");
+            }
+
             var usuario = new Usuario
             {
                 UserName = usuarioDto.UserName,
-                Password = usuarioDto.Password,
+                Password = usuarioDto.Password, // Considera encriptar la contraseña
+                Rol = "Candidato" // Asignamos rol de Candidato
             };
 
             var usuarioRegistrado = await _usuarioRepository.RegisterUsuario(usuario);
 
-            // Mapea de nuevo a UsuarioDto para retornar
             return new UsuarioDto
             {
                 UserName = usuarioRegistrado.UserName,
-                Password = usuarioRegistrado.Password
+                Password = usuarioRegistrado.Password, // Considera no retornar la contraseña
+                Rol = "Candidato" // Retorna el rol asignado
             };
         }
     }

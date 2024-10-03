@@ -19,19 +19,38 @@ namespace HRBackend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UsuarioDto usuarioDto)
         {
-            var result = await _usuarioService.Login(usuarioDto);
-            if (result == null)
-                return Unauthorized();
+            if (usuarioDto == null)
+            {
+                return BadRequest("Los datos del usuario son requeridos.");
+            }
 
-            // Retornar información del usuario o token según tu implementación.
-            return Ok(result);
+            var user = await _usuarioService.Login(usuarioDto);
+
+            if (user == null)
+            {
+                return Unauthorized("Nombre de usuario o contraseña incorrectos.");
+            }
+
+            return Ok(user); // Retorna el UsuarioDto que incluye el rol
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UsuarioDto usuarioDto)
         {
-            var result = await _usuarioService.Register(usuarioDto);
-            return CreatedAtAction(nameof(Register), result);
+            if (usuarioDto == null)
+            {
+                return BadRequest("Los datos del usuario son requeridos.");
+            }
+
+            try
+            {
+                var registeredUser = await _usuarioService.Register(usuarioDto);
+                return CreatedAtAction(nameof(Login), new { username = registeredUser.UserName }, registeredUser);
+            }
+            catch (Exception ex)
+            {
+                return Conflict(ex.Message); // Manejo de conflictos, como nombre de usuario ya en uso
+            }
         }
 
     }

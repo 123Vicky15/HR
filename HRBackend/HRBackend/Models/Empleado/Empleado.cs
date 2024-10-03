@@ -12,7 +12,7 @@ namespace HRBackend.Models.Empleado
         public string Puesto { get; set; }
         public decimal SalarioMensual { get; set; }
         public bool Estado { get; set; } // Activo, Inactivo, etc.
-        public int UsuarioId { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        //public int? UsuarioId { get; set; } = 0;
+        //public virtual Usuario? Usuario { get; set; } = null;
     }
 }

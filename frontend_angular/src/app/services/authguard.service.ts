@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthguardService {
-  private apiUrl = 'https://localhost:7021/api/User/register';
+  private apiUrl = 'https://localhost:7021/api/User';
+  user: Usuario = <Usuario>{};
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -17,6 +18,7 @@ export class AuthguardService {
     return this.http.post<Usuario>(`${this.apiUrl}/login`, usuario)
       .pipe(
         tap((res: Usuario) => {
+          this.user = res;
           if (res.rol === 'Empleado') {
             this.router.navigate(['/master']);
           } else if (res.rol === 'Candidato') {

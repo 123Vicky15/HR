@@ -15,7 +15,7 @@ namespace HRBackend.Models.Candidatos
         public string PrincipalesCapacitaciones { get; set; } // Post-grado, Grado, Técnicas, etc.
         public List<ExperienciaLaboral> ExperienciaLaboral { get; set; } = new List<ExperienciaLaboral>();
         public string RecomendadoPor { get; set; }
-        public int UsuarioId { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        //public int? UsuarioId { get; set; }
+        //public virtual Usuario? Usuario { get; set; }
     }
 }

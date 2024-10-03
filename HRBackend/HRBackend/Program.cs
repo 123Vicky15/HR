@@ -24,6 +24,8 @@ builder.Services.AddScoped<IIdiomaService, IdiomaService>();
 builder.Services.AddScoped<IPuestoService, PuestoService>();
 builder.Services.AddScoped<IExperienciaLaboralService, ExperienciaLaboralService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
 
 // Registro de repositorios específicos
 builder.Services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
@@ -33,6 +35,8 @@ builder.Services.AddScoped<ICompetenciaRepository, CompetenciaRepository>();
 builder.Services.AddScoped<IIdiomaRepository, IdiomaRepository>();
 builder.Services.AddScoped<IPuestoRepository, PuestoRepository>();
 builder.Services.AddScoped<IExperienciaLaboralRepository, ExperienciaLaboralRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 
 // Registro de repositorio genérico
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); //Esto permite que el sistema de inyección de dependencias
