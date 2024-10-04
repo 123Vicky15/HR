@@ -14,18 +14,9 @@ export class AuthguardService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/login`, usuario)
-      .pipe(
-        tap((res: Usuario) => {
-          this.user = res;
-          if (res.rol === 'Empleado') {
-            this.router.navigate(['/master']);
-          } else if (res.rol === 'Candidato') {
-            this.router.navigate(['/mastercandidatos']);
-          }
-        })
-      );
+
+  login(loginData : { username: string; password: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData );
   }
 
   register(usuario: Usuario): Observable<Usuario> {

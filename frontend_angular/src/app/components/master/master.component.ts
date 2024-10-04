@@ -7,7 +7,7 @@ import { IdiomasComponent } from '../idiomas/idiomas.component';
 import { PuestosCrearComponent } from '../puestoscrear/puestoscrear.component';
 import { CompetenciasComponent } from '../competencias/competencias.component';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router  } from '@angular/router';
 import { AuthguardService } from '../../services/authguard.service';
 import { Usuario } from '../../models/class/Usuario';
 
@@ -19,6 +19,12 @@ import { Usuario } from '../../models/class/Usuario';
   styleUrl: './master.component.css'
 })
 export class MasterComponent implements OnInit {
+  constructor(private router: Router) {}
+
+  cerrarSesion() {
+    // Redirige al login
+    this.router.navigate(['/login']);
+  }
  currentComponent: string = "Empleados";
  usuario: Usuario = {} as Usuario;
  private autservice = inject(AuthguardService);

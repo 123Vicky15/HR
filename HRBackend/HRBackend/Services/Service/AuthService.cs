@@ -62,26 +62,26 @@ namespace HRBackend.Services.Service
         //    };
         // }
 
-        public async Task<CandidatoDto> LoginCandidato(LoginDto loginDto)
-        {
-            var candidato = await _candidatoRepository.GetEmpleadoByClaveAndNombreAsync(loginDto.Nombre, _candidatoRepository.EncriptarClave(loginDto.Clave));
-            if (candidato == null)
-                throw new Exception("Candidato no encontrado");
+        //public async Task<CandidatoDto> LoginCandidato(LoginDto loginDto)
+        //{
+        //    var candidato = await _candidatoRepository.GetEmpleadoByClaveAndNombreAsync(loginDto.Nombre, _candidatoRepository.EncriptarClave(loginDto.Clave));
+        //    if (candidato == null)
+        //        throw new Exception("Candidato no encontrado");
 
-            return new CandidatoDto
-            {
-                Nombre = candidato.Nombre,
-                Cedula = candidato.Cedula,
-                PuestoAspira = candidato.PuestoAspira,
-                Departamento = candidato.Departamento,
-                SalarioAspira = candidato.SalarioAspira,
-                PrincipalesCompetencias = candidato.PrincipalesCompetencias,
-                PrincipalesCapacitaciones = candidato.PrincipalesCapacitaciones,
-                //ExperienciaLaboral = candidato.ExperienciaLaboral,
-                RecomendadoPor = candidato.RecomendadoPor,
-                //Correo = candidato.Correo,
-                //Clave = candidato.Clave
-            };
-        } 
+        //    return new CandidatoDto
+        //    {
+        //        Nombre = candidato.Nombre,
+        //        Cedula = candidato.Cedula,
+        //        PuestoAspira = candidato.PuestoAspira,
+        //        Departamento = candidato.Departamento,
+        //        SalarioAspira = candidato.SalarioAspira,
+        //        PrincipalesCompetencias = candidato.PrincipalesCompetencias,
+        //        PrincipalesCapacitaciones = candidato.PrincipalesCapacitaciones,
+        //        //ExperienciaLaboral = candidato.ExperienciaLaboral,
+        //        RecomendadoPor = candidato.RecomendadoPor,
+        //        //Correo = candidato.Correo,
+        //        //Clave = candidato.Clave
+        //    };
+        //} 
     }
 }

@@ -15,22 +15,29 @@ import { tap } from 'rxjs/operators';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  credentials = {
+  loginData = {
     username: '',
     password: ''
   };
 
-  constructor(private authService: AuthguardService) { }
+  errorMessage: string | null = null;
 
-  login() {
-    const usuario = new Usuario(0, this.credentials.username, this.credentials.password, '');
-    this.authService.login(usuario).subscribe(
-      response => {
-        console.log('Login exitoso:', response);
-      },
-      error => {
-        console.error('Error en el login:', error);
-      }
-    );
+  constructor(private authguardService: AuthguardService, private router: Router) {}
+
+  onSubmit() {
+    this.errorMessage = null; // Resetea el mensaje de error
+
+    this.authguardService.login(this.loginData)
+      .subscribe({
+        next: (response) => {
+          console.log('Login exitoso', response);
+          // Redirige al dashboard u otra ruta
+          this.router.navigate(['/mastercandidatos']);
+        },
+        error: (error) => {
+          console.error('Error en el login', error);
+          this.errorMessage = 'Usuario o contraseña incorrectos';
+        }
+      });
   }
 }

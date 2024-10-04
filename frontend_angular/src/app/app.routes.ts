@@ -27,188 +27,115 @@ import { MasterComponent } from './components/master/master.component';
 
 export const routes: Routes = [
   {
+    path: 'register',
+    component: RegistrationComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: '',
     component: MasterComponent,
     children: [
       {
         path: 'candidatoscrear',
         component: CandidatoscrearComponent,
-     //   canActivate: [AuthGuard],
-      //  data: { roles: ['User'] }
       },
+      {
+        path: 'mastercandidatos',
+        component: MastercandidatosComponent,
+      },
+      {
+        path: 'experiencia-laboralcrear',
+        component: ExperienciaLaboralCrearComponent,
+      },
+      {
+        path: 'idiomaseditar',
+        component: IdiomaseditarComponent,
+      },  
+      {
+        path: 'idiomascrear',
+        component: IdiomascrearComponent,
+      },
+      { 
+        path: 'idiomaseditar/:id', 
+        component: IdiomaseditarComponent, 
+      },
+      { 
+        path: 'puestoseditarcomponent/:id', 
+        component: PuestoeditarComponent, 
+      },
+      { 
+        path: 'competenciasformeditar/:id', 
+        component: CompetenciasformeditarComponent,
+      },
+      {
+        path: 'competenciasformcrear',
+        component: CompetenciasformcrearComponent,
+      },
+      {
+        path: 'competenciasformeditar',
+        component: CompetenciasformeditarComponent,
+      },
+      {
+        path: 'capacitacionesformcrear',
+        component: CapacitacionesformcrearComponent,
+      },
+      {
+        path: 'capacitacionesform/:id',
+        component: CapacitacionesformComponent,
+      },
+      {
+        path: 'candidatos/:id',
+        component: CandidatosComponent,
+      },
+      {
+        path: 'candidatos',
+        component: CandidatosComponent,
+      },
+      {
+        path: 'empleados',
+        component: EmpleadosComponent,
+      },
+      {
+        path: 'empleadosdetalles/:id',
+        component: EmpleadosdetallesComponent,
+      },
+      {
+        path: 'competencias',
+        component: CompetenciasComponent,
+      },
+      {
+        path: 'idiomas',
+        component: IdiomasComponent,
+      },
+      {
+        path: 'capacitaciones',
+        component: CapacitacionesComponent,
+      },
+      {
+        path: 'puestos',
+        component: PuestosComponent,
+      },
+      {
+        path: 'puestosvercomponent',
+        component: PuestosverComponent,
+      },
+      {
+        path: 'puestoseditarcomponent',
+        component: PuestoeditarComponent,
+      },
+      {
+        path: 'puestoscrearcomponent',
+        component: PuestosCrearComponent,
+      }
     ]
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
   },
   {
-    path: 'register',
-    component: RegistrationComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
-  },
-  {
-    path: 'mastercandidatos',
-    component: MastercandidatosComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
-  },
-  {
-    path: 'experiencia-laboralcrear',
-    component: ExperienciaLaboralCrearComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
-  },
-
-  // Rutas accesibles solo por empleados de HR
-// {
- //   path: 'hr-dashboard',
- //   component: HrDashboardComponent,
-   // canActivate: [AuthGuard],
-//data: { roles: ['HR'] }
-  //},
-  {
-    path: 'idiomaseditar',
-    component: IdiomaseditarComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },  
-  {
-    path: 'idiomascrear',
-    component: IdiomascrearComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  { 
-    path: 'idiomaseditar/:id', 
-    component: IdiomaseditarComponent, 
-      //  data: { roles: ['HR'] }
-
-  },
-  { 
-    path: 'puestoseditarcomponent/:id', 
-    component: PuestoeditarComponent, 
-      //  data: { roles: ['HR'] }
-
-  },
-  { 
-    path: 'competenciasformeditar/:id', 
-    component: CompetenciasformeditarComponent,
-      //  data: { roles: ['HR'] }
-
-  },
-  {
-    path: 'competenciasformcrear',
-    component: CompetenciasformcrearComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'competenciasformeditar',
-    component: CompetenciasformeditarComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'capacitacionesformcrear',
-    component: CapacitacionesformcrearComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
-  },
-  {
-    path: 'capacitacionesform/:id',
-    component: CapacitacionesformComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'candidatos/:id',
-    component: CandidatosComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'candidatos',
-    component: CandidatosComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'empleados',
-    component: EmpleadosComponent,
- //   canActivate: [AuthGuard],
- //   data: { roles: ['HR'] }
-  },
-  {
-    path: 'empleadosdetalles/:id',
-    component: EmpleadosdetallesComponent,
- //   canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'competencias',
-    component: CompetenciasComponent,
-//    canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'idiomas',
-    component: IdiomasComponent,
- //   canActivate: [AuthGuard],
-//    data: { roles: ['HR'] }
-  },
-  {
-    path: 'capacitaciones',
-    component: CapacitacionesComponent,
-  //  canActivate: [AuthGuard],
-  //  data: { roles: ['User'] }
-  },
-  {
-    path: 'puestos',
-    component: PuestosComponent,
-  //  canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'puestosvercomponent',
-    component: PuestosverComponent,
-  //  canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'puestoseditarcomponent',
-    component: PuestoeditarComponent,
-  //  canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  {
-    path: 'puestoscrearcomponent',
-    component: PuestosCrearComponent,
-  //  canActivate: [AuthGuard],
-  //  data: { roles: ['HR'] }
-  },
-  
-  // Rutas accesibles solo por candidatos
-//  {
-  //  path: 'candidato-dashboard',
- //   component: CandidatoDashboardComponent,
- //   canActivate: [AuthGuard],
- //   data: { roles: ['Candidato'] }
- // },
- // {
-  //  path: 'puestos-disponibles',
-  //  component: PuestosComponent,
- //   canActivate: [AuthGuard],
- //   data: { roles: ['Candidato'] }
- // },
-
-  // Ruta de página de inicio o default (opcional)
- // { path: '', redirectTo: '/login', pathMatch: 'full' },
-  // Ruta para manejo de páginas no encontradas
- //// { path: '**', redirectTo: '/login' }
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  }
 ];
+

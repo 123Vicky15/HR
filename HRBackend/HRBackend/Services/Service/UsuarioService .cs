@@ -20,22 +20,19 @@ namespace HRBackend.Services.Service
             _empleadoRepository = empleadoRepository;
         }
 
-        public async Task<UsuarioDto> Login(UsuarioDto usuarioDto)
+        public async Task<LoginDto> Login(LoginDto loginDto)
         {
-            var usuario = await _usuarioRepository.GetUsuario(usuarioDto.UserName);
-            //if (usuario == null || usuario.Password != usuarioDto.Password)
-            //    return null;
-            if (usuario.Rol == "Empleado")
+            // Obtener el usuario por nombre
+            var usuario = await _usuarioRepository.GetUsuario(loginDto.UserName);
+
+            // Verificar si el usuario no fue encontrado
+            if (usuario == null || usuario.Password != loginDto.Password)
             {
-                return usuarioDto;
-            }
-            else {
-                usuarioDto.Rol = "Candidato";
+                return null; // O lanzar una excepción según tu lógica
             }
 
-            return usuarioDto;
+            return loginDto; 
         }
-
 
         public async Task<UsuarioDto> Register(UsuarioDto usuarioDto)
         {
