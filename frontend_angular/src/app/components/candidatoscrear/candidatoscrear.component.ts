@@ -28,13 +28,14 @@ export class CandidatoscrearComponent implements OnInit {
   competenciasList: Competencias[] = [];         // Lista de competencias
   capacitacionesList: Capacitaciones[] = [];       // Lista de capacitaciones
   experienciaLaboralList: ExperienciaLaboral[] = [];       // Lista de Experiencia
-
+  candidatosList: Candidato[] = [];
 
   constructor(
     private idiomaService: IdiomaService,
     private competenciaService: CompetenciaService,
     private capacitacionService: CapacitacionService,
-    private experienciaLaboralService: ExperienciaLaboralService
+    private experienciaLaboralService: ExperienciaLaboralService,
+    private candidatoService: CandidatoService
   ) {}
 
   ngOnInit(): void {
@@ -90,10 +91,16 @@ export class CandidatoscrearComponent implements OnInit {
   }
 
   // Función para crear el candidato
-  onCreateCandidato(form: NgForm): void {
-    // Aquí puedes llamar al servicio que guarda el candidato en la base de datos
-    console.log('Candidato creado:', this.candidatoObj);
-    form.resetForm();
-    this.candidatoObj = new Candidato();
+  onCreateCandidato(form: NgForm): void { 
+    this.candidatoService.createCandidato(this.candidatoObj).subscribe({
+      next: (response) => {
+        console.log('Candidato creado:', response);
+        form.resetForm(); // Reiniciar el formulario tras la creación exitosa
+        this.candidatoObj = new Candidato(); // Reiniciar el objeto candidato
+      },
+      error: (err) => {
+        console.error('Error al crear el candidato:', err);
+      }
+    });
   }
 }

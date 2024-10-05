@@ -32,7 +32,7 @@ export class LoginComponent {
         next: (response) => {
           console.log('Login exitoso', response);
           // Redirige al dashboard u otra ruta
-          this.router.navigate(['/mastercandidatos']);
+          //this.router.navigate(['/mastercandidatos']);
         },
         error: (error) => {
           console.error('Error en el login', error);

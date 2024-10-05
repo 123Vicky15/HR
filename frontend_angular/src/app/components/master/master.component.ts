@@ -20,6 +20,7 @@ import { Usuario } from '../../models/class/Usuario';
 })
 export class MasterComponent implements OnInit {
   constructor(private router: Router) {}
+  rolUsuario: string = '';
 
   cerrarSesion() {
     // Redirige al login
@@ -33,6 +34,12 @@ export class MasterComponent implements OnInit {
  }
 
  ngOnInit(): void {
-  this.usuario = this.autservice.user;
- }
+  // Obtener el rol del usuario del localStorage o de algún servicio
+  this.rolUsuario = localStorage.getItem('rolUsuario') || ''; 
+
+  // Si no hay rol, redirigir al login
+  if (!this.rolUsuario) {
+    this.router.navigate(['/login']);
+  }
+}
 }

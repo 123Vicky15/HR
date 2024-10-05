@@ -16,7 +16,17 @@ export class AuthguardService {
 
 
   login(loginData : { username: string; password: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, loginData );
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData).pipe(
+      tap(response => {
+        if (loginData.username === 'empleadoHR') {
+          // Forzar que el rol sea 'empleado'
+          response.rol = 'empleado';
+        }  
+        localStorage.setItem('rolUsuario', response.rol);
+        // Redirigir a la ruta principal después del login
+        this.router.navigate(['/']);
+      })
+    );
   }
 
   register(usuario: Usuario): Observable<Usuario> {
