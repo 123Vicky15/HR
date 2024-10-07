@@ -20,8 +20,11 @@ export class CandidatoService {
   }
 
   // Crear una nueva candidato
-  createCandidato(candidato: Candidato): Observable<Candidato> {
-    return this.http.post<Candidato>(this.apiUrl, candidato);
+  createCandidato(candidatoData: any): Observable<any> {
+    const body = {
+      ...candidatoData
+    };
+    return this.http.post(`${this.apiUrl}`, body);
   }
 
   // Editar una candidato existente

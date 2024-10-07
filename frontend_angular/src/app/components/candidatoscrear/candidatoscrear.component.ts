@@ -104,17 +104,31 @@ export class CandidatoscrearComponent implements OnInit {
     });
   }
 
-  // Función para crear el candidato
-  onCreateCandidato(form: NgForm): void { 
-    this.candidatoService.createCandidato(this.candidatoObj).subscribe({
-      next: (response) => {
-        console.log('Candidato creado:', response);
-        form.resetForm(); // Reiniciar el formulario tras la creación exitosa
-        this.candidatoObj = new Candidato(); // Reiniciar el objeto candidato
-      },
-      error: (err) => {
-        console.error('Error al crear el candidato:', err);
-      }
-    });
-  }
+
+onCreateCandidato(form: NgForm): void {
+  const candidatoData = {
+    cedula: this.candidatoObj.cedula,
+    nombre: this.candidatoObj.nombre,
+    puestoAspira: this.candidatoObj.puestoAspira,
+    departamento: this.candidatoObj.departamento,
+    salarioAspira: this.candidatoObj.salarioAspira,
+    principalesCompetencias: this.candidatoObj.principalesCompetencias,
+    principalesCapacitaciones: this.candidatoObj.principalesCapacitaciones,
+    recomendadoPor: this.candidatoObj.recomendadoPor,
+    experienciaLaboralDto: this.candidatoObj.experienciaLaboral 
+  };
+
+  // Llama a la función para crear el candidato
+  this.candidatoService.createCandidato(candidatoData).subscribe({
+    next: (response) => {
+      console.log('Candidato creado:', response);
+      form.resetForm(); // Reinicia el formulario tras la creación exitosa
+      this.candidatoObj = new Candidato(); // Reinicia el objeto candidato
+    },
+    error: (err) => {
+      console.error('Error al crear el candidato:', err);
+    }
+  });
+}
+
 }
