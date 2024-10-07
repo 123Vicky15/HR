@@ -8,11 +8,13 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdiomaService } from '../../services/idioma.service';  // Servicio para obtener los idiomas
 import { CompetenciaService } from '../../services/competencia.service'; // Servicio para competencias
 import { CapacitacionService } from '../../services/capacitacion.service';
+import { PuestosService } from '../../services/puestos.service';
 import { ExperienciaLaboralService } from '../../services/experiencia-laboral.service';  // Servicio para obtener los idiomas
 import { Idiomas } from '../../models/class/Idiomas';
 import { Competencias } from '../../models/class/Competencias';
 import { Capacitaciones } from '../../models/class/Capacitaciones';
 import { ExperienciaLaboral } from '../../models/class/ExperienciaLaboral';
+import { Puestos } from '../../models/class/Puestos';
 
 @Component({
   selector: 'app-candidatoscrear',
@@ -23,19 +25,24 @@ import { ExperienciaLaboral } from '../../models/class/ExperienciaLaboral';
 })
 export class CandidatoscrearComponent implements OnInit {
   candidatoObj: Candidato = new Candidato();
-  
+  puestoObj: Puestos = new Puestos();
   idiomasList: Idiomas[] = [];              // Lista de idiomas
   competenciasList: Competencias[] = [];         // Lista de competencias
   capacitacionesList: Capacitaciones[] = [];       // Lista de capacitaciones
   experienciaLaboralList: ExperienciaLaboral[] = [];       // Lista de Experiencia
   candidatosList: Candidato[] = [];
+  id: number = 0;
 
   constructor(
     private idiomaService: IdiomaService,
     private competenciaService: CompetenciaService,
     private capacitacionService: CapacitacionService,
     private experienciaLaboralService: ExperienciaLaboralService,
-    private candidatoService: CandidatoService
+    private candidatoService: CandidatoService,
+    private puestoService: PuestosService,
+    private route: ActivatedRoute, 
+    private router: Router
+    
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +50,16 @@ export class CandidatoscrearComponent implements OnInit {
     this.getCompetencias();
     this.getCapacitaciones();
     this.getExperienciaLaboral();
+
+    this.id = this.route.snapshot.params['id'];
+    if (this.id) {
+      this.puestoService.getPuestoById(this.id).subscribe((res: Puestos) => {
+        this.puestoObj = res;
+      });
+    }
   }
 
-  // Función para obtener los idiomas de la base de datos
+  
   getIdiomas(): void {
     this.idiomaService.getIdioma().subscribe({
       next: (res: Idiomas[]) => {

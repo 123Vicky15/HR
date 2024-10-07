@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HRBackend.Migrations
 {
     [DbContext(typeof(HRBackendContext))]
-    [Migration("20241003192715_SecondMi")]
-    partial class SecondMi
+    [Migration("20241005232703_newnew")]
+    partial class newnew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,17 +251,12 @@ namespace HRBackend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CandidatoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Rol")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
@@ -269,10 +264,6 @@ namespace HRBackend.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CandidatoId");
-
-                    b.HasIndex("EmpleadoId");
 
                     b.ToTable("Usuarios");
                 });
@@ -284,25 +275,6 @@ namespace HRBackend.Migrations
                         .HasForeignKey("CandidatoId");
 
                     b.Navigation("Candidato");
-                });
-
-            modelBuilder.Entity("HRBackend.Models.Empleado.Usuario", b =>
-                {
-                    b.HasOne("HRBackend.Models.Candidatos.Candidato", "Candidato")
-                        .WithMany()
-                        .HasForeignKey("CandidatoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HRBackend.Models.Empleado.Empleado", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Candidato");
-
-                    b.Navigation("Empleado");
                 });
 
             modelBuilder.Entity("HRBackend.Models.Candidatos.Candidato", b =>

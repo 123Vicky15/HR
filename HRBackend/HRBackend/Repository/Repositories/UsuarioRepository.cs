@@ -11,21 +11,14 @@ namespace HRBackend.Repository.Repositories
         public UsuarioRepository(HRBackendContext context) : base(context) { }
 
        
-        public async Task<Usuario> GetUsuarioByNombre(string nombre)
-        {
-            return await _dbSet.Include(u => u.Empleado)
-                                          .Include(u => u.Candidato)
-                                          .FirstOrDefaultAsync(u => u.UserName == nombre);
-        }
         public async Task<Usuario> GetUsuario(string username)
         {
             return await _dbSet.FirstOrDefaultAsync(u => u.UserName == username);
         }
 
-        public async Task<Usuario> RegisterUsuario(Usuario usuario)
+        public async Task RegisterUsuario(Usuario usuario)
         {
             await _dbSet.AddAsync(usuario);
-            return usuario;
         }
 
     }

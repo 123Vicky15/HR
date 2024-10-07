@@ -3,21 +3,18 @@ using HRBackend.Models.Empleado;
 using HRBackend.Repository.Interface;
 using HRBackend.Repository.Repositories;
 using HRBackend.Services.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRBackend.Services.Service
 {
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly ICandidatoRepository _candidatoRepository;
-        private readonly IEmpleadoRepository _empleadoRepository;
 
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, ICandidatoRepository candidatoRepository, IEmpleadoRepository empleadoRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
-            _candidatoRepository = candidatoRepository;
-            _empleadoRepository = empleadoRepository;
         }
 
         public async Task<LoginDto> Login(LoginDto loginDto)
@@ -34,29 +31,32 @@ namespace HRBackend.Services.Service
             return loginDto; 
         }
 
-        public async Task<UsuarioDto> Register(UsuarioDto usuarioDto)
+        public async Task AddUser(UsuarioDto usuarioDto)
         {
-            // Verifica si el nombre de usuario ya existe
-            var existingUser = await _usuarioRepository.GetUsuarioByNombre(usuarioDto.UserName);
-            if (existingUser != null)
-            {
-                throw new Exception("El nombre de usuario ya está en uso.");
-            }
-
             var usuario = new Usuario
             {
                 UserName = usuarioDto.UserName,
-                Password = usuarioDto.Password, // Considera encriptar la contraseña
-                Rol = "Candidato" // Asignamos rol de Candidato
-            };
+                Password = usuarioDto.Password,
+                Rol = "Candidato"
 
-            var usuarioRegistrado = await _usuarioRepository.RegisterUsuario(usuario);
+            };
+            await _usuarioRepository.AddAsync(usuario);
+            usuarioDto.Id = usuario.Id;
+
+        }
+        public async Task<UsuarioDto?> GetUsuarioByIdAsync(int id)
+        {
+            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            if (usuario == null)
+            {
+                return null;
+            }
 
             return new UsuarioDto
             {
-                UserName = usuarioRegistrado.UserName,
-                Password = usuarioRegistrado.Password, // Considera no retornar la contraseña
-                Rol = "Candidato" // Retorna el rol asignado
+                Id = usuario.Id,
+                UserName = usuario.UserName,
+                Password = usuario.Password 
             };
         }
     }

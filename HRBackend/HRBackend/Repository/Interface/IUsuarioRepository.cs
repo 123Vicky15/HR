@@ -2,11 +2,11 @@
 
 namespace HRBackend.Repository.Interface
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IGenericRepository<Usuario>
     {
-        Task<Usuario> GetUsuarioByNombre(string nombre);
+        //Task<Usuario> GetUsuarioByNombre(string nombre);
 
         Task<Usuario> GetUsuario(string username);
-        Task<Usuario> RegisterUsuario(Usuario usuario);
+        Task RegisterUsuario(Usuario usuario);
     }
 }

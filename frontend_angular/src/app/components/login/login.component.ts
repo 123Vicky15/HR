@@ -1,4 +1,4 @@
-import { AuthguardService } from '../../services/authguard.service';  // Servicio para obtener los idiomas
+import { AuthguardService } from '../../services/authguard.service';  
 import { Router, RouterLink } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';

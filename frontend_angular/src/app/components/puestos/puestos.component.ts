@@ -15,11 +15,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   styleUrl: './puestos.component.css'
 })
 export class PuestosComponent implements OnInit {
+ 
   puestosList: Puestos[] = [];
   selectedPuestoId: number | null = null;
   filtroRiesgo: string = '';
   puestosFiltrados: Puestos[] = [];
-  constructor(private puestosService: PuestosService) {}
+  constructor(private puestosService: PuestosService, private router: Router) {}
 
   ngOnInit(): void {
     this.getPuestos();
@@ -29,24 +30,24 @@ export class PuestosComponent implements OnInit {
     this.puestosService.getPuestos().subscribe({
       next: (res: Puestos[]) => {
         this.puestosList = res;
-        this.puestosFiltrados = res;
-        this.filtrarPuestosPorRiesgo();
+        this.puestosFiltrados = res;  // Mostrar todos los puestos al principio
       },
       error: (err) => {
         console.error('Error al obtener los puestos:', err);
       }
     });
   }
+  
 
   filtrarPuestosPorRiesgo(): void {
     if (this.filtroRiesgo === '') {
-      // Si no hay filtro, mostrar todos los puestos
       this.puestosFiltrados = this.puestosList;
     } else {
-      // Filtrar los puestos por el nivel de riesgo seleccionado
       this.puestosFiltrados = this.puestosList.filter(puesto => puesto.nivelRiesgo === this.filtroRiesgo);
     }
   }
+  
+  
   selectPuesto(puestoId: number) {
     if (this.selectedPuestoId === puestoId) {
       this.selectedPuestoId = null; // Deseleccionar si ya está seleccionado
@@ -57,9 +58,8 @@ export class PuestosComponent implements OnInit {
 
   solicitarPuesto() {
     if (this.selectedPuestoId !== null) {
-      // Lógica para solicitar el puesto
       console.log(`Puesto seleccionado: ${this.selectedPuestoId}`);
-      // Aquí puedes agregar la lógica para enviar la solicitud del puesto al servidor
+      this.router.navigate(['/candidatoscrear', this.selectedPuestoId]);
     } else {
       alert('Debes seleccionar un puesto.');
     }

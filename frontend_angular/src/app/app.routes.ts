@@ -42,6 +42,9 @@ export const routes: Routes = [
         path: 'candidatoscrear',
         component: CandidatoscrearComponent,
       },
+      { path: 'candidatoscrear/:id', 
+        component: CandidatoscrearComponent 
+      },
       {
         path: 'mastercandidatos',
         component: MastercandidatosComponent,

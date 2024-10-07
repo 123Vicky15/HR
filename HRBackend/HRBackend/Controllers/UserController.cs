@@ -33,24 +33,24 @@ namespace HRBackend.Controllers
 
             return Ok(user); 
         }
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UsuarioDto usuarioDto)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UsuarioDto>> GetUsuarioById(int id)
         {
-            if (usuarioDto == null)
+            var usuario = await _usuarioService.GetUsuarioByIdAsync(id);
+            if (usuario == null)
             {
-                return BadRequest("Los datos del usuario son requeridos.");
+                return NotFound();
             }
+            return Ok(usuario);
+        }
+        [HttpPost("register")]
+        public async Task<ActionResult> AddUsuario(UsuarioDto usuarioDto)
+        {
+            // Llama al servicio para agregar el usuario
+            await _usuarioService.AddUser(usuarioDto);
 
-            try
-            {
-                var registeredUser = await _usuarioService.Register(usuarioDto);
-                return CreatedAtAction(nameof(Login), new { username = registeredUser.UserName }, registeredUser);
-            }
-            catch (Exception ex)
-            {
-                return Conflict(ex.Message); // Manejo de conflictos, como nombre de usuario ya en uso
-            }
+            // Retorna la respuesta Created con el nuevo usuario y su ID
+            return CreatedAtAction(nameof(GetUsuarioById), new { id = usuarioDto.Id }, usuarioDto);
         }
 
     }

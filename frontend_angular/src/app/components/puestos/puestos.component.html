@@ -11,22 +11,23 @@
           </select>
         </div>
       </div>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let puesto of puestosList">
-        <div class="card mb-4" [ngClass]="{'border-success': puesto.id === selectedPuestoId}">
-          <div class="card-body">
-            <h5 class="card-title">{{ puesto.nombre }}</h5>
-            <p class="card-text">{{ puesto.nivelRiesgo }}</p>
-            <p class="card-text">{{ puesto.nivelMinimoSalario }}</p>
-            <p class="card-text">{{ puesto.nivelMaximoSalario }}</p>
-            <button class="btn btn-primary btn-sm" (click)="selectPuesto(puesto.id)">
-              {{ puesto.id === selectedPuestoId ? 'Deseleccionar' : 'Seleccionar' }}
-            </button>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let puesto of puestosFiltrados">
+          <div class="card mb-4" [ngClass]="{'border-success': puesto.id === selectedPuestoId}">
+            <div class="card-body">
+              <h5 class="card-title">{{ puesto.nombre }}</h5>
+              <p class="card-text">Nivel de Riesgo: {{ puesto.nivelRiesgo }}</p>
+              <p class="card-text">Salario Minimo: {{ puesto.nivelMinimoSalario }}</p>
+              <p class="card-text">Salario Maximo: {{ puesto.nivelMaximoSalario }}</p>
+              <button class="btn btn-primary btn-sm" (click)="selectPuesto(puesto.id)">
+                {{ puesto.id === selectedPuestoId ? 'Deseleccionar' : 'Seleccionar' }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      
   
-    <button class="btn btn-success" (click)="solicitarPuesto()">Solicitar Puesto</button>
+      <button class="btn btn-success" (click)="solicitarPuesto()" [disabled]="!selectedPuestoId">Solicitar Puesto</button>
   </div>
   
