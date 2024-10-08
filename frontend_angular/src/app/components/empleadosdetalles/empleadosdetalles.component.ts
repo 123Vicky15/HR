@@ -36,20 +36,41 @@ export class EmpleadosdetallesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.candidatoId = +params['id']; // Obtener el ID del candidato desde la URL
-      this.puestoId = +params['id'];
+      //this.puestoId = +params['id'];
       this.obtenerCandidato(this.candidatoId);
-      this.obtenerPuesto(this.puestoId);
+      // this.obtenerTodosLosPuestos();
+      //this.obtenerPuesto(this.puestoId);
     });
   }
   onEstadoChange(value: any) {
     this.candidato.estado = value === 'true';  // Asegura que el valor sea booleano
   }
 
+  // obtenerTodosLosPuestos() {
+  //   this.puestosService.getPuestos().subscribe({
+  //     next: (response) => {
+  //       this.puesto = response; // Guardar la lista de puestos
+  //     },
+  //     error: (error) => console.error('Error al obtener puestos:', error)
+  //   });
+  // }
+
   obtenerCandidato(id: number) {
     this.candidatoService.getCandiatoById(id).subscribe({
       next: (response) => {
         console.log('Candidato obtenido:', response);
         this.candidato = response;
+
+      //   const puestoEncontrado = this.puesto.find(p => p.nombre === this.candidato.puestoAspira);
+      // if (puestoEncontrado) {
+      //   this.puestoId = puestoEncontrado.id; // Asignar el puestoId encontrado
+      //   this.llenarDatosCandidato();
+      // } else {
+      //   console.error('No se encontró un puesto con ese nombre.');
+      // }
+
+        //this.candidato.recomendadoPor = this.candidato.puestoAspira;
+        this.obtenerPuesto(this.puestoId);
         this.llenarDatosCandidato();
       },
       error: (error) => console.error('Error al obtener candidato:', error)
@@ -70,7 +91,7 @@ export class EmpleadosdetallesComponent implements OnInit {
     this.empleadoDto.nombre = this.candidato.nombre;
     this.empleadoDto.cedula = this.candidato.cedula;
     this.empleadoDto.departamento = this.candidato.departamento;
-    this.empleadoDto.puesto = this.puesto.nombre;
+    this.empleadoDto.puesto = this.candidato.puestoAspira;
     //this.empleadoDto.puesto = this.puestosService.
 
   }
@@ -84,7 +105,7 @@ export class EmpleadosdetallesComponent implements OnInit {
         Estado: this.empleadoDto.estado  // Incluye el estado
       };
   
-      this.empleadoService.convertirCandidatoAEmpleado(this.candidatoId, this.puestoId,convertirCandidatoRequest).subscribe({
+      this.empleadoService.convertirCandidatoAEmpleado(this.candidatoId, convertirCandidatoRequest).subscribe({
         next: (response) => {
           alert('Candidato convertido en empleado con éxito');
           this.router.navigate(['/empleados']); 

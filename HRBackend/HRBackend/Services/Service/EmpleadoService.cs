@@ -64,7 +64,7 @@ namespace HRBackend.Services.Service
         public async Task ConvertirCandidatoAEmpleado(ConvertirCandidatoRequest request)
         {
             var candidato = await _candidatoRepository.GetByIdAsync(request.CandidatoId);
-            var puesto = await _puestoRepository.GetByIdAsync(request.PuestoId);
+            //var puesto = await _puestoRepository.GetByIdAsync(request.PuestoId);
 
             if (request.SalarioMensual <= 0)
             {
@@ -74,7 +74,7 @@ namespace HRBackend.Services.Service
             {
                 Nombre = candidato.Nombre,
                 Cedula = candidato.Cedula,
-                Puesto = puesto.Nombre,
+                Puesto = candidato.PuestoAspira,
                 SalarioMensual = request.SalarioMensual,
                 Departamento = request.Departamento,
                 FechaIngreso = request.FechaIngreso.ToUniversalTime(),

@@ -9,11 +9,13 @@ import { IdiomasComponent } from './components/idiomas/idiomas.component';
 import { CompetenciasComponent } from './components/competencias/competencias.component';
 import { MastercandidatosComponent } from "./components/mastercandidatos/mastercandidatos.component";
 import { LoginComponent } from "./components/login/login.component";
+import { EsperaComponent } from "./components/espera/espera.component";
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MasterComponent, CandidatosComponent, PuestosComponent, EmpleadosComponent, CapacitacionesComponent, IdiomasComponent, CompetenciasComponent, RouterLink, MastercandidatosComponent, LoginComponent],
+  imports: [RouterOutlet,EsperaComponent, MasterComponent, CandidatosComponent, PuestosComponent, EmpleadosComponent, CapacitacionesComponent, IdiomasComponent, CompetenciasComponent, RouterLink, MastercandidatosComponent, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

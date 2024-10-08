@@ -84,13 +84,15 @@ export class CandidatoscrearComponent implements OnInit {
   getCompetencias(): void {
     this.competenciaService.getCompetencia().subscribe({
       next: (res: Competencias[]) => {
-        this.competenciasList = res;
+        // Filtra las competencias que tienen estado 'true'
+        this.competenciasList = res.filter(competencia => competencia.estado === true);
       },
       error: (err) => {
         console.error('Error al obtener competencias:', err);
       }
     });
   }
+  
 
   // Función para obtener las capacitaciones de la base de datos
   getCapacitaciones(): void {
@@ -109,7 +111,7 @@ onCreateCandidato(form: NgForm): void {
   const candidatoData = {
     cedula: this.candidatoObj.cedula,
     nombre: this.candidatoObj.nombre,
-    puestoAspira: this.candidatoObj.puestoAspira,
+    puestoAspira: this.puestoObj.nombre,
     departamento: this.candidatoObj.departamento,
     salarioAspira: this.candidatoObj.salarioAspira,
     principalesCompetencias: this.candidatoObj.principalesCompetencias,

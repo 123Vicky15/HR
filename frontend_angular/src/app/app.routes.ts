@@ -21,11 +21,16 @@ import { MastercandidatosComponent } from './components/mastercandidatos/masterc
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { MasterComponent } from './components/master/master.component';
+import { EsperaComponent } from './components/espera/espera.component';
 
 
 
 
 export const routes: Routes = [
+  {
+    path: 'espera',
+    component: EsperaComponent,
+  },
   {
     path: 'register',
     component: RegistrationComponent,

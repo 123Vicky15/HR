@@ -45,20 +45,15 @@ namespace HRBackend.Controllers
         [HttpPost("convertir")]
         public async Task<IActionResult> ConvertirCandidatoAlEmpleado([FromBody] ConvertirCandidatoRequest request)
         {
-            if (request.CandidatoId == 0 || request.PuestoId == 0)
+            if (request.CandidatoId == 0 )
             {
                 return BadRequest("Datos incompletos.");
             }
 
-            try
-            {
                 await _empleadoService.ConvertirCandidatoAEmpleado(request);
                 return Ok("Candidato convertido a empleado exitosamente.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error al convertir candidato a empleado: {ex.Message}");
-            }
+            
+
         }
 
 
