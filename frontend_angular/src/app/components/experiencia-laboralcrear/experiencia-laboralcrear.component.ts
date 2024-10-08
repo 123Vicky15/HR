@@ -46,7 +46,13 @@ export class ExperienciaLaboralCrearComponent implements OnInit {
       this.experienciaLaboralObj.fechaHasta = ''; // Resetea la fecha 'hasta'
     }
   }
-
+  salario() { 
+    // Validar que los salarios no sean menores o iguales a 0
+    if (this.experienciaLaboralObj.salario <= 0) {
+      alert('El salario debe ser mayor que cero.');
+      return;
+    }
+  }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     if (this.id) {

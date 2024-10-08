@@ -29,8 +29,9 @@ export class IdiomaseditarComponent implements OnInit {
     }
   }
   
-  onEstadoChange(value: any) {
-    this.idiomasObj.estado = value === 'true';  // Asegura que el valor sea booleano
+  onEstadoChange(value: boolean) {
+    this.idiomasObj.estado = value;  // Asignar el valor booleano directamente
+    console.log("Estado cambiado a:", this.idiomasObj.estado);  // Imprimir para verificar
   }
   
   onUpdateIdioma(form: any): void {

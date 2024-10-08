@@ -19,8 +19,9 @@ export class PuestosCrearComponent implements OnInit {
   puestoService = inject(PuestosService); // Inyecta el servicio de Puesto
 
   // Cambia el estado de booleano a Activo o Inactivo
-  onEstadoChange(value: any) {
-    this.puestoObj.estado = value === 'true';  // Asegúrate de que el valor sea booleano
+  onEstadoChange(value: boolean) {
+    this.puestoObj.estado = value;  // Asignar el valor booleano directamente
+    console.log("Estado cambiado a:", this.puestoObj.estado);  // Imprimir para verificar
   }
 
   // Método para crear un nuevo puesto
@@ -39,15 +40,9 @@ export class PuestosCrearComponent implements OnInit {
   }
 
   salario() { 
-    // Validar que los salarios no sean menores o iguales a 0
-    if (this.puestoObj.nivelMinimoSalario <= 0 || this.puestoObj.nivelMaximoSalario <= 0) {
-      console.error('El salario mínimo y máximo deben ser mayores que cero.');
-      return;
-    }
-  
     // Validar que el salario mínimo no sea mayor que el salario máximo
     if (this.puestoObj.nivelMinimoSalario > this.puestoObj.nivelMaximoSalario) {
-      console.error('El salario mínimo no puede ser mayor que el salario máximo.');
+      alert('El salario mínimo no puede ser mayor que el salario máximo.');
       return;
     }
   

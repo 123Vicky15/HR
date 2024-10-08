@@ -29,10 +29,15 @@ export class PuestoeditarComponent implements OnInit {
       });
     }
   }
-  
-  onEstadoChange(value: any) {
-    this.puestoObj.estado = value === 'true';  // Asegura que el valor sea booleano
+
+  onEstadoChange(value: boolean) {
+    this.puestoObj.estado = value;  // Asignar el valor booleano directamente
+    console.log("Estado cambiado a:", this.puestoObj.estado);  // Imprimir para verificar
   }
+  
+  // onEstadoChange(value: any) {
+  //   this.puestoObj.estado = value === 'true';  // Asegura que el valor sea booleano
+  // }
 
   salario() { 
     // Validar que los salarios no sean menores o iguales a 0
@@ -58,7 +63,14 @@ export class PuestoeditarComponent implements OnInit {
           this.router.navigate(['/puestosver']);
         },
         error => {
-          console.error('Error al actualizar el Puesto', error);
+          if (error.status === 404) {
+            alert('Error: El puesto con este ID no existe.');
+          } else if (error.status === 500) {
+            // Este caso maneja el ArgumentException
+            alert('Error: ' + error.error);  // Muestra el mensaje de error del backend
+          } else {
+            alert('Error: Ha ocurrido un error inesperado.');
+          }
         }
       );
     }

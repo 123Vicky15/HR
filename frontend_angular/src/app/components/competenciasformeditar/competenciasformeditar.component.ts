@@ -29,8 +29,10 @@ export class CompetenciasformeditarComponent implements OnInit {
       });
     }
   }
-  onEstadoChange(value: any) {
-    this.competenciasObj.estado = value === 'true';  // Asegura que el valor sea booleano
+
+  onEstadoChange(value: boolean) {
+    this.competenciasObj.estado = value;  // Asignar el valor booleano directamente
+    console.log("Estado cambiado a:", this.competenciasObj.estado);  // Imprimir para verificar
   }
   onUpdateCompetencia(form: any): void {
     if (form.valid) {

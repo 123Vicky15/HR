@@ -11,10 +11,12 @@ namespace HRBackend.Services.Service
     public class CandidatoService : ICandidatoService
     {
         private readonly ICandidatoRepository _candidatoRepository;
+        private readonly IExperienciaLaboralService _experienciaLaboralService;
 
-        public CandidatoService(ICandidatoRepository candidatoRepository)
+        public CandidatoService(ICandidatoRepository candidatoRepository, IExperienciaLaboralService experienciaLaboralService)
         {
             _candidatoRepository = candidatoRepository;
+            _experienciaLaboralService = experienciaLaboralService;
         }
         public async Task<CandidatoDto> GetCandidatoByIdAsync(int id)
         {
@@ -133,6 +135,17 @@ namespace HRBackend.Services.Service
                 throw new KeyNotFoundException($"El candidato con ID {id} no existe.");
             }
 
+            // Eliminar las experiencias laborales asociadas
+            if (candidato.ExperienciaLaboral != null && candidato.ExperienciaLaboral.Any())
+            {
+                foreach (var experiencia in candidato.ExperienciaLaboral)
+                {
+                    // Aquí puedes llamar a un método en tu repositorio de experiencia laboral para eliminarla
+                  await _experienciaLaboralService.DeleteExperienciaLaboralAsync(experiencia.Id);
+                }
+            }
+
+            // Eliminar el candidato
             _candidatoRepository.Delete(candidato);
 
         }

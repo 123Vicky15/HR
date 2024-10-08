@@ -82,8 +82,8 @@ namespace HRBackend.Services.Service
             };
             try
             {
-
             await _empleadoRepository.AddAsync(empleado);
+
             }
             catch (Exception ex)
             {

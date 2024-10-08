@@ -8,6 +8,6 @@
         public required string Departamento { get; set; } 
         public DateTime FechaIngreso { get; set; }
         public bool Estado { get; set; }
-        ///.... empleados
+
     }
 }

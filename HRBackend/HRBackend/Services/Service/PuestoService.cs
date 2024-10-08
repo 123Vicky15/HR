@@ -50,10 +50,6 @@ namespace HRBackend.Services.Service
 
         public async Task AddPuestoAsync(PuestoDto puestoDto)
         {
-            if (puestoDto.NivelMinimoSalario < 1000)
-            {
-                throw new ArgumentException("El salario mínimo no puede ser menor a 1000.");
-            }
 
             if (puestoDto.NivelMinimoSalario < 0 || puestoDto.NivelMaximoSalario < 0)
             {
@@ -83,10 +79,6 @@ namespace HRBackend.Services.Service
             if (puesto == null)
             {
                 throw new KeyNotFoundException($"El puesto con ID {puestoDto.Id} no existe.");
-            }
-            if (puestoDto.NivelMinimoSalario < 1000)
-            {
-                throw new ArgumentException("El salario mínimo no puede ser menor a 1000.");
             }
 
             if (puestoDto.NivelMinimoSalario < 0 || puestoDto.NivelMaximoSalario < 0)

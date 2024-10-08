@@ -48,6 +48,7 @@ export class EmpleadosdetallesComponent implements OnInit {
   obtenerCandidato(id: number) {
     this.candidatoService.getCandiatoById(id).subscribe({
       next: (response) => {
+        console.log('Candidato obtenido:', response);
         this.candidato = response;
         this.llenarDatosCandidato();
       },
@@ -68,24 +69,25 @@ export class EmpleadosdetallesComponent implements OnInit {
     // Solo copiar los datos que comparten entre candidato y empleado
     this.empleadoDto.nombre = this.candidato.nombre;
     this.empleadoDto.cedula = this.candidato.cedula;
-    this.empleadoDto.puesto = this.candidato.puestoAspira;
+    this.empleadoDto.departamento = this.candidato.departamento;
+    this.empleadoDto.puesto = this.puesto.nombre;
     //this.empleadoDto.puesto = this.puestosService.
-    // Los demás campos quedan vacíos para ser llenados manualmente
+
   }
 
   convertirAEmpleado() {
     if (this.validarFormulario()) {
       const convertirCandidatoRequest = {
         SalarioMensual: this.empleadoDto.salarioMensual,
-        Departamento: this.empleadoDto.departamento,
+        Departamento: this.candidato.departamento,  // Asegúrate de incluir el departamento
         FechaIngreso: this.empleadoDto.fechaIngreso,
-        Estado: this.empleadoDto.estado
+        Estado: this.empleadoDto.estado  // Incluye el estado
       };
-
-      this.empleadoService.convertirCandidatoAEmpleado(this.candidatoId, this.puestoId, convertirCandidatoRequest).subscribe({
+  
+      this.empleadoService.convertirCandidatoAEmpleado(this.candidatoId, this.puestoId,convertirCandidatoRequest).subscribe({
         next: (response) => {
           alert('Candidato convertido en empleado con éxito');
-          this.router.navigate(['/empleados']); // Redirigir a la lista de empleados
+          this.router.navigate(['/empleados']); 
         },
         error: (error) => console.error('Error al convertir candidato:', error)
       });

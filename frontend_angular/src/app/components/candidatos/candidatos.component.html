@@ -15,7 +15,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Cedula</th>
-                    <th>Puesto al que Aspira</th>
+                    <!-- <th>Puesto al que Aspira</th> -->
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -36,11 +36,11 @@
                         </div>
                     </td>
                     <td>
-                        <p class="text-muted mb-0">{{ candidatoObj.cedula }}</p>
+                        <p class="text-muted mb-0">{{ candidato.cedula }}</p>
                     </td>
-                    <td>
-                        <p class="fw-normal mb-1">{{ candidatoObj.puestoAspira }}</p>
-                    </td>
+                    <!-- <td>
+                        <p class="fw-normal mb-1">{{ candidato.puestoAspira }}</p>
+                    </td> -->
                     <td>
                         <!-- Botón para ver detalles -->
                         <button type="button" class="btn btn-link btn-sm btn-rounded" title="Ver" (click)="verCandidato(candidato.id)">

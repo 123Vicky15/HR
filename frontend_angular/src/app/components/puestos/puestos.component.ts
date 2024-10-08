@@ -29,14 +29,15 @@ export class PuestosComponent implements OnInit {
   getPuestos(): void {
     this.puestosService.getPuestos().subscribe({
       next: (res: Puestos[]) => {
-        this.puestosList = res;
-        this.puestosFiltrados = res;  // Mostrar todos los puestos al principio
+        this.puestosList = res.filter(puesto => puesto.estado === true);
+        this.puestosFiltrados = this.puestosList;  
       },
       error: (err) => {
         console.error('Error al obtener los puestos:', err);
       }
     });
   }
+  
   
 
   filtrarPuestosPorRiesgo(): void {
