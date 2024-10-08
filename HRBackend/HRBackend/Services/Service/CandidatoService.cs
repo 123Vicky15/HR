@@ -209,19 +209,19 @@ namespace HRBackend.Services.Service
                 RecomendadoPor = candidatoDto.RecomendadoPor
             };
 
-            // Mapeo de la experiencia laboral desde el DTO
-            var experienciasLaborales = candidatoDto.ExperienciaLaboralDto.Select(e => new ExperienciaLaboral
-            {
-                Empresa = e.Empresa,
-                PuestoOcupado = e.PuestoOcupado,
-                FechaDesde = e.FechaDesde,
-                FechaHasta = e.FechaHasta,
-                Salario = e.Salario,
-                Candidato = candidato  // Relacionar la experiencia con el candidato
-            }).ToList();
+            //// Mapeo de la experiencia laboral desde el DTO
+            //var experienciasLaborales = candidatoDto.ExperienciaLaboralDto.Select(e => new ExperienciaLaboral
+            //{
+            //    Empresa = e.Empresa,
+            //    PuestoOcupado = e.PuestoOcupado,
+            //    FechaDesde = e.FechaDesde,
+            //    FechaHasta = e.FechaHasta,
+            //    Salario = e.Salario,
+            //    Candidato = candidato  // Relacionar la experiencia con el candidato
+            //}).ToList();
 
-            // Asignación de la experiencia laboral al candidato
-            candidato.ExperienciaLaboral = experienciasLaborales;
+            ////Asignación de la experiencia laboral al candidato
+            //candidato.ExperienciaLaboral = experienciasLaborales;
 
             // Guardar el candidato en la base de datos
             await _candidatoRepository.AddAsync(candidato);
@@ -240,14 +240,15 @@ namespace HRBackend.Services.Service
                 PrincipalesCompetencias = c.PrincipalesCompetencias,
                 PrincipalesCapacitaciones = c.PrincipalesCapacitaciones,
                 RecomendadoPor = c.RecomendadoPor,
-                ExperienciaLaboralDto = c.ExperienciaLaboral.Select(ex => new ExperienciaLaboralDto
-                {
-                    Empresa = ex.Empresa,
-                    PuestoOcupado = ex.PuestoOcupado,
-                    FechaDesde = ex.FechaDesde,
-                    FechaHasta = ex.FechaHasta,
-                    Salario = ex.Salario
-                }).ToList()
+                ExperienciaLaboralDto = new List<ExperienciaLaboralDto>()
+                //ExperienciaLaboralDto = c.ExperienciaLaboral.Select(ex => new ExperienciaLaboralDto
+                //{
+                //    Empresa = ex.Empresa,
+                //    PuestoOcupado = ex.PuestoOcupado,
+                //    FechaDesde = ex.FechaDesde,
+                //    FechaHasta = ex.FechaHasta,
+                //    Salario = ex.Salario
+                //}).ToList()
             }).ToList();
 
             return candidatosDto;
