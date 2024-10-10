@@ -124,6 +124,18 @@ export class EmpleadosdetallesComponent implements OnInit {
     );
   }
 
+  actualizarCandidatoEstado() {
+    if (confirm('¿Estás seguro de convertirlo a Empleado?')) {
+      this.candidatoService.deleteCandidato(this.candidatoId).subscribe({
+        next: () => {
+          alert('Empleado Agregado');
+          this.router.navigate(['/empleados']); // Redirigir a la lista de candidatos
+        },
+        error: (error) => console.error('Error al convertir candidato:', error)
+      });
+    }
+  }
+
   eliminarCandidato() {
     if (confirm('¿Estás seguro de eliminar este candidato?')) {
       this.candidatoService.deleteCandidato(this.candidatoId).subscribe({

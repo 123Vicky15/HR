@@ -39,7 +39,7 @@
   
       <div class="d-flex justify-content-between">
         <button type="button" class="btn btn-danger" (click)="eliminarCandidato()">Eliminar Candidato</button>
-        <button type="submit" class="btn btn-success" [disabled]="!convertForm.valid">Convertir a Empleado</button>
+        <button type="submit" class="btn btn-success" [disabled]="!convertForm.valid"(click)="actualizarCandidatoEstado()">Convertir a Empleado</button>
       </div>
     </form>
   </div>

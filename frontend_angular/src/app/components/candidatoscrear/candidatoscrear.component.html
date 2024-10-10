@@ -55,7 +55,7 @@
 
       <div class="mb-3">
         <label for="experienciaLaboral" class="form-label">Experiencia Laboral</label>
-        <select [(ngModel)]="candidatoObj.experienciaLaboral" name="experienciaLaboral" class="form-select" id="experienciaLaboral" multiple>
+        <select [(ngModel)]="candidatoObj.experienciaLaboral" name="experienciaLaboral" class="form-select" id="experienciaLaboral" multiple required>
           <option *ngFor="let experiencia of experienciaLaboralList" [value]="experiencia">{{ experiencia.puestoOcupado }}</option>
         </select>
       </div>

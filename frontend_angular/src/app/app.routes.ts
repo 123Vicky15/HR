@@ -28,10 +28,6 @@ import { EsperaComponent } from './components/espera/espera.component';
 
 export const routes: Routes = [
   {
-    path: 'espera',
-    component: EsperaComponent,
-  },
-  {
     path: 'register',
     component: RegistrationComponent,
   },
@@ -49,6 +45,10 @@ export const routes: Routes = [
       },
       { path: 'candidatoscrear/:id', 
         component: CandidatoscrearComponent 
+      },
+      {
+        path: 'espera',
+        component: EsperaComponent,
       },
       {
         path: 'mastercandidatos',

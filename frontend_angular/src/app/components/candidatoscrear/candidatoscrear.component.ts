@@ -125,6 +125,7 @@ onCreateCandidato(form: NgForm): void {
     next: (response) => {
       console.log('Candidato creado:', response);
       form.resetForm(); // Reinicia el formulario tras la creación exitosa
+      this.router.navigate(['/espera']);
       this.candidatoObj = new Candidato(); // Reinicia el objeto candidato
     },
     error: (err) => {

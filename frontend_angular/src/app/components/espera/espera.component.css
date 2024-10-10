@@ -11,11 +11,14 @@ body {
     font-family: 'Arial', sans-serif;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
@@ -54,5 +57,3 @@ button {
 button:hover {
     background-color: #d4890e;
 }
-
-
